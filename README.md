@@ -14,3 +14,20 @@ Temporary Name: It is for CST8257
 4. Test with RestfulAPI
 5. Launching => August 8
    
+
+# Functions? 
+
+## In Navigation bar
+- Logo, Link for each page (Only show if user login), Login/out button
+
+## Home Page
+- Search bar (Not mandatory)
+- List of Decks separated by languages
+
+## User's Top Page (THIS IS JUST MY IDEA, WILL REPLACE FROM YOUR IDEA)
+Similar to Home page but only listed the Decks user created.
+- Nav bar may have both Home and User Page link
+
+## Flashcard List
+
+## Edit/Add Page

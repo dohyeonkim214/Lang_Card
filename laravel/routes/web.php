@@ -1,7 +1,11 @@
 <?php
 
+use App\Http\Controllers\LangCardController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::get('/', [LangCardController::class, 'index']);
+Route::get('/create', [LangCardController::class, 'create']);
+Route::post('/store', [LangCardController::class, 'store']);
+
+?>

@@ -19,6 +19,8 @@ PHP/Laravel + Blade
 5. Test with RestfulAPI => August 3rd/4rd
 6. Launching => August 8
 
+#
+#
 # Mami's thought (7/30 added)
 I said there's lots of differences on WhatsApp, but actually it may not such big differences...
 Let's decide the best way.
@@ -35,7 +37,42 @@ So User can add both sentence and word but DB don't consider to store them into 
 It's better to decide which language User can create. Otherwise there will be lots of same language data in DB (like "Korean", "KOREAN", "korean", "Korean Language"). This will hard to display Decks separated by languages.
 
 ## DB Design
-I'm writing now...
+All table will have "created" and "updated" culunm.
+
+### User Table
+- id
+- user_name
+- password
+
+### Language Table
+We'll decide which language should be available. Below is just an example languages.
+This table is not upcated by Users.
+- id
+- lang_name (eg. English, French, Korean, Japanese, Portuguese, Spanish)
+
+### Deck Table
+- id
+- deck_name
+- conpleted
+- user_id
+- lang_id
+
+### Flashcard Table
+- id
+- english
+- second_language
+- secondLang_id
+- user_id
+- deck_id -> Will have multiple. (Need to decide Max decks card can belong to)
+
+## Another Thing
+Since Decks are desplayed separated by languages. I added "Language Selection" in the Wireframe "Create/Edit" page.
+
+#
+#
+#
+
+
 
 # Database Design Specification
 

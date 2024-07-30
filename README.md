@@ -18,7 +18,24 @@ PHP/Laravel + Blade
 4. Code the Views => August 1st~3rd
 5. Test with RestfulAPI => August 3rd/4rd
 6. Launching => August 8
-   
+
+# Mami's thought (7/30 added)
+I said there's lots of differences on WhatsApp, but actually it may not such big differences...
+Let's decide the best way.
+
+### Before think about DB structure...
+- About Flashcard
+In our App (language flashcard), Flashcard is a "English <=> English/Other Language" pair. It can be stored as a "Question <=> Answer" pair depends on how User use it. But it's better to think it simply.
+
+- Sentence and Word
+Although we create a flashcards based on Communication class's game, we are requred to implement additional logic if we distinguish between "Sentence" and "Word". 
+So User can add both sentence and word but DB don't consider to store them into different table.
+
+- About Languages
+It's better to decide which language User can create. Otherwise there will be lots of same language data in DB (like "Korean", "KOREAN", "korean", "Korean Language"). This will hard to display Decks separated by languages.
+
+## DB Design
+I'm writing now...
 
 # Database Design Specification
 

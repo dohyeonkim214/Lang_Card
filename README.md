@@ -1,3 +1,30 @@
+# Pages
+## index (Home)
+D
+### Functions
+
+
+## Login (default)
+M
+
+## User's Top page
+M
+
+## Managing decks 
+D
+
+## Flashcard list
+D
+
+## create/edit page
+D
+
+1 - restful API
+2 - Functions
+
+
+
+
 # Lang_Card
 
 This project is a capstone project of CST8257, Algonquin College.

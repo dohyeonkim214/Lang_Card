@@ -59,9 +59,9 @@ This table is not upcated by Users.
 
 ### Flashcard Table
 - id
-- english
-- second_language
-- secondLang_id
+- english_text
+- second_language_text
+- language_id
 - user_id
 - deck_id -> Will have multiple. (Need to decide Max decks card can belong to)
 

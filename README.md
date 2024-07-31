@@ -1,3 +1,6 @@
+＃ !NOTE! laravel directly is a previous project.
+if we don't need it, then delete it.
+
 # Lang_Card
 
 This project is a capstone project of CST8257, Algonquin College.

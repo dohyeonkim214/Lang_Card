@@ -1,4 +1,4 @@
-＃ !NOTE! laravel directly is a previous project.
+# !NOTE! laravel directly is a previous project.
 if we don't need it, then delete it.
 
 # Lang_Card

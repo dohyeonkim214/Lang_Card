@@ -1,66 +1,219 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Lang_Card
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+This project is a capstone project of CST8257, Algonquin College.
 
-## About Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+# Due date: August 9, 2024
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+# Skills
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+PHP/Laravel + Blade
 
-## Learning Laravel
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+# Scheduling
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+1. Wireframe => finish by July, 28
+2. Laravel/Blade Setting => July 30
+3. Database migration => July 30, 31
+4. Code the Views => August 1st~3rd
+5. Test with RestfulAPI => August 3rd/4rd
+6. Launching => August 8
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+#
+#
+# Mami's thought (7/30 added)
+I said there's lots of differences on WhatsApp, but actually it may not such big differences...
+Let's decide the best way.
 
-## Laravel Sponsors
+### Before think about DB structure...
+#### About Flashcard
+In our App (language flashcard), Flashcard is a "English <=> English/Other Language" pair. It can be stored as a "Question <=> Answer" pair depends on how User use it. But it's better to think it simply.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+#### Sentence and Word
+Although we create a flashcards based on Communication class's game, we are requred to implement additional logic if we distinguish between "Sentence" and "Word". 
+So User can add both sentence and word but DB don't consider to store them into different table.
 
-### Premium Partners
+#### About Languages
+It's better to decide which language User can create. Otherwise there will be lots of same language data in DB (like "Korean", "KOREAN", "korean", "Korean Language"). This will hard to display Decks separated by languages.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+## DB Design
+All table will have "created" and "updated" culunm.
 
-## Contributing
+### User Table
+- id
+- user_name
+- password
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Language Table
+We'll decide which language should be available. Below is just an example languages.
+This table is not upcated by Users.
+- id
+- lang_name (eg. English, French, Korean, Japanese, Portuguese, Spanish)
 
-## Code of Conduct
+### Deck Table
+- id
+- deck_name
+- conpleted
+- user_id
+- lang_id
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Flashcard Table
+- id
+- english_text
+- second_language_text
+- language_id
+- user_id
+- deck_id -> Will have multiple. (Need to decide Max decks card can belong to)
 
-## Security Vulnerabilities
+## Another Thing
+Since Decks are desplayed separated by languages. I added "Language Selection" in the Wireframe "Create/Edit" page.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+#
+#
+#
 
-## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+# Database Design Specification
+
+## 1. Languages Table
+**Table Name:** `languages`
+
+**Description:** This table stores the different languages that are available in the application.
+
+| Field Name | Data Type    | Constraints                                 | Description                              |
+|------------|--------------|---------------------------------------------|------------------------------------------|
+| id         | BIGINT       | PRIMARY KEY, AUTO INCREMENT                 | Unique identifier for the language.      |
+| name       | VARCHAR(255) | NOT NULL                                    | Name of the language.                    |
+| created_at | TIMESTAMP    | NULLABLE                                    | Timestamp when the language was created. |
+| updated_at | TIMESTAMP    | NULLABLE                                    | Timestamp when the language was last updated. |
+
+## 2. Words Table
+**Table Name:** `words`
+
+**Description:** This table stores individual words in different languages.
+
+| Field Name | Data Type    | Constraints                                                     | Description                              |
+|------------|--------------|-----------------------------------------------------------------|------------------------------------------|
+| id         | BIGINT       | PRIMARY KEY, AUTO INCREMENT                                     | Unique identifier for the word.          |
+| word       | VARCHAR(255) | NOT NULL                                                        | The word itself.                         |
+| completed  | BOOLEAN      | DEFAULT FALSE                                                   | Status of whether the word is completed. |
+| language_id| BIGINT       | FOREIGN KEY REFERENCES `languages(id)` ON DELETE CASCADE        | The language to which the word belongs.  |
+| created_at | TIMESTAMP    | NULLABLE                                                        | Timestamp when the word was created.     |
+| updated_at | TIMESTAMP    | NULLABLE                                                        | Timestamp when the word was last updated. |
+
+## 3. Sentences Table
+**Table Name:** `sentences`
+
+**Description:** This table stores sentences in different languages.
+
+| Field Name | Data Type    | Constraints                                                     | Description                                |
+|------------|--------------|-----------------------------------------------------------------|--------------------------------------------|
+| id         | BIGINT       | PRIMARY KEY, AUTO INCREMENT                                     | Unique identifier for the sentence.        |
+| sentence   | TEXT         | NOT NULL                                                        | The sentence itself.                       |
+| completed  | BOOLEAN      | DEFAULT FALSE                                                   | Status of whether the sentence is completed.|
+| language_id| BIGINT       | FOREIGN KEY REFERENCES `languages(id)` ON DELETE CASCADE        | The language to which the sentence belongs.|
+| created_at | TIMESTAMP    | NULLABLE                                                        | Timestamp when the sentence was created.   |
+| updated_at | TIMESTAMP    | NULLABLE                                                        | Timestamp when the sentence was last updated. |
+
+## 4. LangCards Table
+**Table Name:** `lang_cards`
+
+**Description:** This table stores flashcards that include questions and answers.
+
+| Field Name | Data Type    | Constraints                                                     | Description                                 |
+|------------|--------------|-----------------------------------------------------------------|---------------------------------------------|
+| id         | BIGINT       | PRIMARY KEY, AUTO INCREMENT                                     | Unique identifier for the lang card.        |
+| question   | VARCHAR(255) | NOT NULL                                                        | The question on the lang card.              |
+| answer     | VARCHAR(255) | NOT NULL                                                        | The answer on the lang card.                |
+| language_id| BIGINT       | FOREIGN KEY REFERENCES `languages(id)` ON DELETE CASCADE        | The language to which the lang card belongs.|
+| created_at | TIMESTAMP    | NULLABLE                                                        | Timestamp when the lang card was created.   |
+| updated_at | TIMESTAMP    | NULLABLE                                                        | Timestamp when the lang card was last updated. |
+
+## 5. Decks Table
+**Table Name:** `decks`
+
+**Description:** This table stores collections of flashcards grouped into decks.
+
+| Field Name | Data Type    | Constraints                                                     | Description                              |
+|------------|--------------|-----------------------------------------------------------------|------------------------------------------|
+| id         | BIGINT       | PRIMARY KEY, AUTO INCREMENT                                     | Unique identifier for the deck.          |
+| name       | VARCHAR(255) | NOT NULL                                                        | Name of the deck.                        |
+| language_id| BIGINT       | FOREIGN KEY REFERENCES `languages(id)` ON DELETE CASCADE        | The language to which the deck belongs.  |
+| created_at | TIMESTAMP    | NULLABLE                                                        | Timestamp when the deck was created.     |
+| updated_at | TIMESTAMP    | NULLABLE                                                        | Timestamp when the deck was last updated. |
+| type       | ENUM         | NULLABLE                                                        | Type of the deck (word or sentence).|
+
+
+## Defining Relationships Between Tables
+
+### Languages Table:
+**Primary Entity:** The languages table serves as the primary entity that holds the different languages available in the application.
+
+**One-to-Many Relationships:** This table has a one-to-many relationship with the decks, words, sentences, and lang_cards tables. This means one language can have multiple decks, words, sentences, and language cards associated with it.
+
+### Decks Table:
+**Foreign Key:** The decks table contains a foreign key `language_id` that references the `id` column in the `languages` table.
+
+**Belongs To Relationship:** Each record in the decks table belongs to a single record in the `languages` table.
+
+**Type Column:** The decks table includes a `type` column to specify whether the deck is for words or sentences.
+
+### Words Table:
+**Foreign Key:** The words table contains a foreign key `language_id` that references the `id` column in the `languages` table.
+
+**Belongs To Relationship:** Each record in the words table belongs to a single record in the `languages` table.
+
+### Sentences Table:
+**Foreign Key:** The sentences table contains a foreign key `language_id` that references the `id` column in the `languages` table.
+
+**Belongs To Relationship:** Each record in the sentences table belongs to a single record in the `languages` table.
+
+### LangCards Table:
+**Foreign Key:** The lang_cards table contains a foreign key `language_id` that references the `id` column in the `languages` table.
+
+**Belongs To Relationship:** Each record in the lang_cards table belongs to a single record in the `languages` table.
+
+### Entity-Relationship (ER) Diagram Representation
+- **Languages (1) —> (N) Decks**
+- **Languages (1) —> (N) Words**
+- **Languages (1) —> (N) Sentences**
+- **Languages (1) —> (N) LangCards**
+
+### Explanation:
+- **One-to-Many Relationship:** This type of relationship indicates that a single record in the parent table (`languages`) can be associated with multiple records in the child tables (`decks`, `words`, `sentences`, `lang_cards`).
+- **Foreign Key Constraints:** Foreign keys are used to enforce the relationship between tables, ensuring referential integrity. For example, the `language_id` in the `decks` table must match an `id` in the `languages` table.
+- **Cascade on Delete:** The `onDelete('cascade')` constraint means that when a record in the parent table (`languages`) is deleted, all related records in the child tables (`decks`, `words`, `sentences`, `lang_cards`) will also be automatically deleted.
+
+### Steps to Implement:
+1. **Create Migration Files:** Define the structure of each table and specify foreign keys in the migration files.
+2. **Run Migrations:** Execute the migrations to create the tables in the database.
+3. **Define Models:** Create Eloquent models for each table and define the relationships using methods like `hasMany` and `belongsTo`.
+4. **Set Up Controllers:** Implement controllers to manage the data flow between the database and the views, leveraging the defined relationships.
+
+
+# Functions By RestFul API
+
+1. Create: Create new Decks and FlashCards(POST)
+2. Delete: Delete current decks and Flashcards(DELETE)
+3. Edit: Edit current Decks and Flashcards(PUT)
+4. Add: Add a new word/sentence on Flashcard(PUT)
+5. Index: Show Decks list/Flashcards List(GET)
+
+
+## In Navigation bar
+- Logo, Link for each page (Only show if user login), Login/out button
+
+## Home Page
+- Search bar (Not mandatory)
+- List of Decks separated by languages
+
+## User's Top Page (THIS IS JUST MY IDEA, WILL REPLACE FROM YOUR IDEA)
+Similar to Home page but only listed the Decks user created.
+- Nav bar may have both Home and User Page link
+
+## Flashcard List Page
+Display a list of flashcards for the selected deck
+
+## Flashcard Add/Edit Page
+Input fields for flashcard question and answer

@@ -24,7 +24,7 @@ class FlashcardFactory extends Factory
             "second_language_text" => $this->faker->sentence(3),
             "language_id" => Language::inRandomOrder()->first()->id,
             "user_id" => User::inRandomOrder()->first()->id,
-            "deck_id" => Deck::inRandomOrder()->first()->id
+            // "deck_id" => Deck::inRandomOrder()->first()->id
         ];
     }
 }

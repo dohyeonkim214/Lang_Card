@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->text('english_text');
             $table->text('second_language_text');
-            $table->bigInteger('language_id')->unsigned();
-            $table->bigInteger('user_id')->unsigned();
-            $table->bigInteger('deck_id')->unsigned();
+            $table->foreignId('language_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            // $table->bigInteger('deck_id')->unsigned();
             $table->timestamps();
         });
     }

@@ -20,6 +20,7 @@ class DeckFactory extends Factory
     {
         return [
             "name" => $this->faker->sentence(3),
+            'completed' => $this->faker->boolean(),
             "user_id" => User::inRandomOrder()->first()->id,
             "language_id" => Language::inRandomOrder()->first()->id
         ];

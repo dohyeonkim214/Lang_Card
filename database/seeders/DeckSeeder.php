@@ -1,18 +1,22 @@
 <?php
-
-namespace Database\Seeders;
+namespace Database\Factories;
 
 use App\Models\Deck;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-class DeckSeeder extends Seeder
+class DeckFactory extends Factory
 {
-    /**
-     * Run the database seeds.
-     */
-    public function run(): void
+    protected $model = Deck::class;
+
+    public function definition()
     {
-        Deck::factory()->count(15)->create();
+        return [
+            'name' => $this->faker->word,
+            'completed' => $this->faker->boolean,
+            'user_id' => 1, // 또는 사용자 ID를 적절히 설정
+            'language_id' => $this->faker->numberBetween(1, 2), // 1 또는 2로 설정
+        ];
     }
 }
+
+?>

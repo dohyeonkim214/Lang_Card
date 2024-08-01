@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Deck;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DeckController extends Controller
 {
@@ -12,7 +13,10 @@ class DeckController extends Controller
      */
     public function index()
     {
-        //
+        $user = Auth::user();
+        $decks = $user ? $user->decks : collect();
+
+        return view('index', ["decks" => $decks]);
     }
 
     /**
@@ -20,7 +24,7 @@ class DeckController extends Controller
      */
     public function create()
     {
-        //
+        return view('decks.CreateEdit');
     }
 
     /**
@@ -28,7 +32,12 @@ class DeckController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $deck = new Deck();
+        $deck->title = $request->title;
+        $deck->user_id = Auth::id();
+        $deck->save();
+
+        return redirect()->route('index');
     }
 
     /**
@@ -36,7 +45,7 @@ class DeckController extends Controller
      */
     public function show(Deck $deck)
     {
-        //
+        return view('decks.show', compact('deck'));
     }
 
     /**
@@ -44,7 +53,7 @@ class DeckController extends Controller
      */
     public function edit(Deck $deck)
     {
-        //
+        return view('decks.CreateEdit', compact('deck'));
     }
 
     /**
@@ -52,7 +61,12 @@ class DeckController extends Controller
      */
     public function update(Request $request, Deck $deck)
     {
-        //
+        if (Auth::id() == $deck->user_id) {
+            $deck->title = $request->title;
+            $deck->save();
+        }
+
+        return redirect()->route('decks.show', $deck);
     }
 
     /**
@@ -60,6 +74,10 @@ class DeckController extends Controller
      */
     public function destroy(Deck $deck)
     {
-        //
+        if (Auth::id() == $deck->user_id) {
+            $deck->delete();
+        }
+
+        return redirect()->route('index');
     }
 }

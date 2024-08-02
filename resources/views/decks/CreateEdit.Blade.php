@@ -15,4 +15,6 @@
         </div>
         <button type="submit" class="btn btn-primary">{{ isset($deck) ? 'Update' : 'Save' }}</button>
     </form>
+    <body>
+
 @endsection

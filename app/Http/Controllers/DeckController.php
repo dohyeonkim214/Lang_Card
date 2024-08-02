@@ -13,8 +13,8 @@ class DeckController extends Controller
      */
     public function index()
     {
-        $user = Auth::user();
-        $decks = $user ? $user->decks : collect();
+        // 모든 사용자의 덱을 가져옵니다.
+        $decks = Deck::all();
 
         return view('index', ["decks" => $decks]);
     }
@@ -80,4 +80,9 @@ class DeckController extends Controller
 
         return redirect()->route('index');
     }
+
+    public function showFlashcards(Deck $deck)
+    {
+        $flashcards = $deck->flashcards;
+        return view('decks.flashcards', compact('deck', 'flashcards'));    }
 }

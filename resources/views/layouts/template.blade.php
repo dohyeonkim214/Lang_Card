@@ -27,11 +27,6 @@
             </div>
         </div>
     </header>
-    <main class="container mt-4">
-        <h1>@yield('heading', 'Deck List')</h1>
-        <p>Deck list which is created by multiple users. Both login users and unknown users can see them.</p>
-        @yield('content')
-    </main>
     <footer class="bg-light py-3 mt-4">
         <div class="container">
             <p class="mb-0">&copy; 2024 Deck App</p>

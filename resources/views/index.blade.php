@@ -6,26 +6,32 @@
 
 @section('content')
     <div class="deck-list">
-        <h2>Your Decks</h2>
+        <h2>Discover User's Decks</h2>
         <div class="row">
-            @forelse ($decks as $deck)
-                <div class="col-md-2 mb-3">
+            @php
+                $numPlaceholders = 8 - $decks->count();
+            @endphp
+            @foreach ($decks as $deck)
+                <div class="col-md-3 mb-4">
                     <div class="card">
                         <div class="card-body">
-                            <h5>{{ $deck->title }}</h5>
+                            <h5 class="card-title">{{ $deck->title }}</h5>
                             <a href="{{ route('decks.show', $deck) }}" class="btn btn-primary">View</a>
                         </div>
                     </div>
                 </div>
-            @empty
-                <div class="col-md-2 mb-3">
+            @endforeach
+            @for ($i = 0; $i < $numPlaceholders; $i++)
+                <div class="col-md-3 mb-4">
                     <div class="card">
                         <div class="card-body">
-                            <h5>No Decks Available</h5>
+                            <h5 class="card-title">No Deck Available</h5>
+                            <p class="card-text">This is a placeholder for an empty deck.</p>
+                            <a href="#" class="btn btn-secondary disabled">View</a>
                         </div>
                     </div>
                 </div>
-            @endforelse
+            @endfor
         </div>
         <a href="{{ route('decks.create') }}" class="btn btn-success">Create New Deck</a>
     </div>

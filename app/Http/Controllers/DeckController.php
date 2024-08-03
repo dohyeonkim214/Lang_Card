@@ -15,6 +15,12 @@ class DeckController extends Controller
     public function index()
     {
         return view('dashboard', [
+            "decks" => Deck::all(),
+            "languages" => Language::all()]);
+    }
+
+    public function userDeck () {
+        return view('userpage.index', [
             "decks" => Auth::user()->decks,
             "languages" => Language::all()]);
     }
@@ -56,7 +62,7 @@ class DeckController extends Controller
      */
     public function update(Request $request, Deck $deck)
     {
-        //
+        // 
     }
 
     /**
@@ -64,6 +70,9 @@ class DeckController extends Controller
      */
     public function destroy(Deck $deck)
     {
-        //
+        if (Auth::id() == $deck->user_id) {
+            $deck->delete();
+        }
+        return redirect('/userpage/index');
     }
 }

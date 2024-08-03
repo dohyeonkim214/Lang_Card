@@ -6,10 +6,12 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    <x-nav-link :href="route('userpage.index')" :active="request()->routeIs('userpage.index')">
                         {{ __('Decks') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+
+                    <!-- NEED TO CHANGE LINK TO GO TO CREATE PAGE-->
+                    <x-nav-link :href="route('userpage.samplecreate')" :active="request()->routeIs('userpage.samplecreate')">
                         {{ __('Create New') }}
                     </x-nav-link>
                 </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Deck;
+use App\Models\Language;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,7 +14,9 @@ class DeckController extends Controller
      */
     public function index()
     {
-        return view('dashboard', ["decks" => Auth::user()->decks]);
+        return view('dashboard', [
+            "decks" => Auth::user()->decks,
+            "languages" => Language::all()]);
     }
 
     /**

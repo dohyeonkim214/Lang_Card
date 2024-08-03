@@ -17,7 +17,9 @@
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
             @include('layouts.navigation')
-            @include('layouts.menu')
+            @if (Auth::check() && request()->is('userpage/*'))
+                @include('layouts.menu')
+            @endif
 
             <!-- Page Heading -->
             @isset($header)

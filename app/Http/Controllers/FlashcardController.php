@@ -3,63 +3,43 @@
 namespace App\Http\Controllers;
 
 use App\Models\Flashcard;
+use App\Models\Deck;
+use App\Models\Language; // Add this line
 use Illuminate\Http\Request;
 
 class FlashcardController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function store(Request $request, Deck $deck)
     {
-        //
-    }
+        $request->validate([
+            'english_text' => 'required|string|max:255',
+            'another_language_text' => 'required|string|max:255',
+        ]);
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+        $flashcard = new Flashcard();
+        $flashcard->english_text = $request->english_text;
+        $flashcard->another_language_text = $request->another_language_text;
+        $flashcard->deck_id = $deck->id;
+        $flashcard->save();
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
+        return response()->json([
+            'success' => true,
+            'flashcard' => $flashcard
+        ]);
     }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Flashcard $flashcard)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Flashcard $flashcard)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Flashcard $flashcard)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Flashcard $flashcard)
     {
-        //
+        $flashcard->delete();
+        $flashcards = Flashcard::where('deck_id', $flashcard->deck_id)->get();
+
+        return view('decks.flashcard_list', compact('flashcards'));
+    }
+
+    public function show(Deck $deck)
+    {
+        $flashcards = Flashcard::where('deck_id', $deck->id)->get();
+        $languages = Language::all(); // Load all languages for selection
+        
+        return view('decks.show', compact('deck', 'flashcards', 'languages'));
     }
 }

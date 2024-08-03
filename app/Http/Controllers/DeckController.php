@@ -3,86 +3,111 @@
 namespace App\Http\Controllers;
 
 use App\Models\Deck;
+use App\Models\Language;
+use App\Models\Flashcard;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class DeckController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    use AuthorizesRequests;
+
     public function index()
     {
-        // 모든 사용자의 덱을 가져옵니다.
         $decks = Deck::all();
-
-        return view('index', ["decks" => $decks]);
+        $deckLanguages = Language::withCount('decks')->get();
+        $deckCardCounts = Deck::withCount('flashcards')->get();
+        
+        return view('decks.index', compact('decks', 'deckLanguages', 'deckCardCounts'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    public function userDecks()
+    {
+        $userId = Auth::id();
+        $userDecks = Deck::where('user_id', $userId)->with('language')->get();
+        $deckLanguages = $userDecks->groupBy('language.name');
+
+        return view('decks.user_decks', compact('deckLanguages', 'userDecks'));
+    }
+
     public function create()
     {
-        return view('decks.CreateEdit');
+        $languages = Language::whereIn('name', ['English', 'Japanese', 'Korean', 'Chinese', 'Spanish', 'French'])->get();
+        return view('decks.CreateEdit', compact('languages'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'language_id' => 'required|exists:languages,id',
+        ]);
+    
         $deck = new Deck();
-        $deck->title = $request->title;
-        $deck->user_id = Auth::id();
+        $deck->title = $request->input('title');
+        $deck->name = $request->input('name', 'default_name'); // name 컬럼 설정
+        $deck->user_id = auth()->id();
+        $deck->language_id = $request->input('language_id');
         $deck->save();
-
-        return redirect()->route('index');
+    
+        return redirect()->route('user.decks')->with('success', 'Deck created successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Deck $deck)
-    {
-        return view('decks.show', compact('deck'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Deck $deck)
     {
-        return view('decks.CreateEdit', compact('deck'));
+        $this->authorize('update', $deck); // Ensure the user can update the deck
+        $languages = Language::whereIn('name', ['English', 'Japanese', 'Korean', 'Chinese', 'Spanish', 'French'])->get();        
+        return view('decks.CreateEdit', compact('deck', 'languages'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Deck $deck)
     {
-        if (Auth::id() == $deck->user_id) {
-            $deck->title = $request->title;
-            $deck->save();
-        }
+        $this->authorize('update', $deck); // Ensure the user can update the deck
+        $deck->title = $request->title;
+        $deck->language_id = $request->language_id;
+        $deck->save();
 
-        return redirect()->route('decks.show', $deck);
+        return redirect()->route('user.decks');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Deck $deck)
     {
-        if (Auth::id() == $deck->user_id) {
-            $deck->delete();
-        }
+        $this->authorize('delete', $deck); // Ensure the user can delete the deck
+        $deck->delete();
 
-        return redirect()->route('index');
+        return redirect()->route('user.decks');
+    }
+    
+    public function show(Deck $deck)
+    {
+        $this->authorize('view', $deck); // Ensure the user can view the deck
+        $flashcards = Flashcard::where('deck_id', $deck->id)->get();
+        $languages = Language::all(); // Load all languages for selection
+        
+        return view('decks.show', compact('deck', 'flashcards', 'languages'));
     }
 
-    public function showFlashcards(Deck $deck)
+    public function updateFlashcards(Request $request, Deck $deck)
     {
-        $flashcards = $deck->flashcards;
-        return view('decks.flashcards', compact('deck', 'flashcards'));    }
+        $this->authorize('update', $deck); // Ensure the user can update the deck
+
+        // flashcards가 존재하고 배열인지 확인
+        if ($request->has('flashcards') && is_array($request->flashcards)) {
+            foreach ($request->flashcards as $id => $data) {
+                if (isset($data['delete'])) {
+                    Flashcard::destroy($id);
+                } else {
+                    $flashcard = Flashcard::find($id);
+                    $flashcard->english_text = $data['english_text'];
+                    $flashcard->another_language_text = $data['another_language_text'];
+                    $flashcard->language_id = $data['language_id'];
+                    $flashcard->save();
+                }
+            }
+        }
+
+        return redirect()->route('decks.show', $deck)->with('success', 'Flashcards updated successfully.');
+    }
 }

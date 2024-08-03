@@ -1,12 +1,12 @@
 @extends('layouts.template')
 
-@section('title', 'Home')
+@section('title', 'Decks')
 
-@section('heading', 'Deck List')
+@section('heading', 'User Decks')
 
 @section('content')
     <div class="deck-list">
-        <h2>Discover User's Decks</h2>
+        <h2>All User's Decks</h2>
         <div class="row">
             @if ($decks->isEmpty())
                 <div class="col-md-12">
@@ -27,5 +27,6 @@
                 @endforeach
             @endif
         </div>
+        <a href="{{ route('decks.create') }}" class="btn btn-success">Create New Deck</a>
     </div>
 @endsection

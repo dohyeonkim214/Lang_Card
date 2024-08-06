@@ -12,9 +12,7 @@ return new class extends Migration
     public function up(): void
     {
 
-        Schema::table('decks', function (Blueprint $table) {
-            $table->string('title');
-        });
+
         Schema::create('decks', function (Blueprint $table) {
             $table->id();
             $table->string('name');
@@ -23,6 +21,11 @@ return new class extends Migration
             $table->bigInteger('language_id')->unsigned();
             $table->timestamps();
         });
+
+        // 8/6 Mami commented out, This code may need to move to another file or sth.
+        // Schema::table('decks', function (Blueprint $table) {
+        //     $table->string('title');
+        // });
     }
 
     /**

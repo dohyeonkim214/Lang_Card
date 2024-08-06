@@ -22,14 +22,15 @@ class CreateLanguagesTable extends Migration
             });
     
             // Insert default languages
-            DB::table('languages')->insert([
-                ['name' => 'English'],
-                ['name' => 'Japanese'],
-                ['name' => 'Korean'],
-                ['name' => 'Chinese'],
-                ['name' => 'Spanish'],
-                ['name' => 'French']
-            ]);
+            // 8/6 Mami commented out, This insertion is already happen in seeder file.
+            // DB::table('languages')->insert([
+            //     ['name' => 'English'],
+            //     ['name' => 'Japanese'],
+            //     ['name' => 'Korean'],
+            //     ['name' => 'Chinese'],
+            //     ['name' => 'Spanish'],
+            //     ['name' => 'French']
+            // ]);
         }
     
 

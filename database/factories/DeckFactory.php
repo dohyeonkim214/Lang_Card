@@ -21,7 +21,8 @@ class DeckFactory extends Factory
         return [
             "name" => $this->faker->sentence(3),
             "user_id" => User::inRandomOrder()->first()->id,
-            "language_id" => Language::inRandomOrder()->first()->id
+            "language_id" => Language::inRandomOrder()->first()->id,
+            "title" => $this->faker->sentence(3)
         ];
     }
 }

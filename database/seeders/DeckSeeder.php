@@ -17,8 +17,8 @@ class DeckSeeder extends Seeder
         Deck::factory()->count(15)->create();
     }
 
-    // Same code is already defined in DeckFactory.php
 
+    // 8/6 Mami commented out. Same code is already defined in DeckFactory.php
     // public function definition()
     // {
     //     return [

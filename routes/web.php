@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
+Route::get('/', function () {
+    return view('dashboard');
+})->name('dashboard');
+
 Route::get('/', [DeckController::class, 'index'])->name('index');
 Route::get('/decks/create', [DeckController::class, 'create'])->name('decks.create');
 Route::post('/decks', [DeckController::class, 'store'])->name('decks.store');
@@ -34,7 +38,8 @@ Route::get('/decks/{deck}/flashcards/{flashcard}/prev', [FlashcardController::cl
 // Add the missing create route
 Route::get('/decks/{deck}/flashcards/create', [FlashcardController::class, 'create'])->name('flashcards.create');
 
-Auth::routes();
+// This code makes an error "In order to use the Auth::routes() method, please install the laravel/ui package." at vendor/laravel/framework/src/Illuminate/Support/Facades/Auth.php:93. Since we are using breeze, we don't need to install this package. I comment out this code.
+// Auth::routes();
 
 Route::get('/create-user', function () {
     User::create([

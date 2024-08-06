@@ -1,26 +1,32 @@
 @extends('layouts.template')
 
-@section('title', $deck->title)
-
 @section('content')
-<div class="container">
-    <h1>{{ $deck->title }}</h1>
-    <h2>Flashcards</h2>
-    @if($flashcards->isEmpty())
-        <p>No words yet!</p>
-    @else
-        <ul id="flashcards-list">
-            @foreach($flashcards as $flashcard)
-                <li id="flashcard-{{ $flashcard->id }}">
-                    {{ $flashcard->english_text }} - {{ $flashcard->another_language_text }}
-                    <button class="delete-flashcard" data-id="{{ $flashcard->id }}">Delete</button>
-                </li>
-            @endforeach
-        </ul>
-    @endif
+<div class="container mt-5">
+    <h2>{{ $deck->title }} - Flashcards</h2>
+    <div class="mt-4">
+        @if ($flashcards->isEmpty())
+            <p>No flashcards yet!</p>
+        @else
+            <ul class="list-group">
+                @foreach ($flashcards as $flashcard)
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span>{{ $flashcard->english_text }} - {{ $flashcard->another_language_text }}</span>
+                        <div class="btn-group" role="group">
+                            <a href="{{ route('flashcards.edit', $flashcard) }}" class="btn btn-secondary btn-sm">Edit</a>
+                            <form action="{{ route('flashcards.destroy', $flashcard) }}" method="POST" style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this flashcard?')">Delete</button>
+                            </form>
+                        </div>
+                    </li>
+                @endforeach
+            </ul>
+        @endif
+    </div>
 
-    <h2>Create Flashcard</h2>
-    <form id="create-flashcard-form">
+    <h2 class="mt-4">Create Flashcard</h2>
+    <form method="POST" action="{{ route('flashcards.store', $deck) }}">
         @csrf
         <div class="mb-3">
             <label for="english_text" class="form-label">English Text</label>
@@ -30,47 +36,16 @@
             <label for="another_language_text" class="form-label">Another Language Text</label>
             <input type="text" class="form-control" id="another_language_text" name="another_language_text" required>
         </div>
+        <div class="mb-3">
+            <label for="language_id" class="form-label">Language Selection</label>
+            <select class="form-select" id="language_id" name="language_id" required>
+                <option value="" disabled selected>Select Language</option>
+                @foreach($languages as $language)
+                    <option value="{{ $language->id }}">{{ $language->name }}</option>
+                @endforeach
+            </select>
+        </div>
         <button type="submit" class="btn btn-primary">Add Flashcard</button>
     </form>
 </div>
-
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    document.getElementById('create-flashcard-form').addEventListener('submit', function (event) {
-        event.preventDefault();
-
-        const englishText = document.getElementById('english_text').value;
-        const anotherLanguageText = document.getElementById('another_language_text').value;
-        const token = document.querySelector('input[name="_token"]').value;
-
-        fetch('{{ route('flashcards.store', $deck) }}', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': token
-            },
-            body: JSON.stringify({
-                english_text: englishText,
-                another_language_text: anotherLanguageText
-            })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                const flashcardsList = document.getElementById('flashcards-list');
-                const newFlashcard = document.createElement('li');
-                newFlashcard.id = 'flashcard-' + data.flashcard.id;
-                newFlashcard.innerHTML = `
-                    ${data.flashcard.english_text} - ${data.flashcard.another_language_text}
-                    <button class="delete-flashcard" data-id="${data.flashcard.id}">Delete</button>
-                `;
-                flashcardsList.appendChild(newFlashcard);
-            } else {
-                alert('Error: ' + data.message);
-            }
-        })
-        .catch(error => console.error('Error:', error));
-    });
-});
-</script>
 @endsection

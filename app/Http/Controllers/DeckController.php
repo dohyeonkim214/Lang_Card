@@ -34,8 +34,10 @@ class DeckController extends Controller
 
     public function create()
     {
+        $userId = Auth::id();
+        $userDecks = Deck::where('user_id', $userId)->get();
         $languages = Language::whereIn('name', ['English', 'Japanese', 'Korean', 'Chinese', 'Spanish', 'French'])->get();
-        return view('decks.CreateEdit', compact('languages'));
+        return view('decks.createEdit', compact('languages', 'userDecks'));
     }
 
     public function store(Request $request)
@@ -59,7 +61,7 @@ class DeckController extends Controller
     {
         $this->authorize('update', $deck); // Ensure the user can update the deck
         $languages = Language::whereIn('name', ['English', 'Japanese', 'Korean', 'Chinese', 'Spanish', 'French'])->get();        
-        return view('decks.CreateEdit', compact('deck', 'languages'));
+        return view('decks.createEdit', compact('deck', 'languages'));
     }
 
     public function update(Request $request, Deck $deck)
@@ -85,9 +87,11 @@ class DeckController extends Controller
         $this->authorize('view', $deck); // Ensure the user can view the deck
         $flashcards = Flashcard::where('deck_id', $deck->id)->get();
         $languages = Language::all(); // Load all languages for selection
-        
-        return view('decks.show', compact('deck', 'flashcards', 'languages'));
+        $userDecks = Deck::where('user_id', Auth::id())->get(); // Load user's decks
+    
+        return view('decks.show', compact('deck', 'flashcards', 'languages', 'userDecks'));
     }
+    
 
     public function updateFlashcards(Request $request, Deck $deck)
     {

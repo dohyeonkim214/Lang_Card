@@ -20,7 +20,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title">{{ $deck->title }}</h5>
-                                <a href="{{ route('decks.show', $deck) }}" class="btn btn-primary">View</a>
+                                <a href="{{ route('flashcard.view', $deck) }}" class="btn btn-primary">View</a>
                             </div>
                         </div>
                     </div>
@@ -29,3 +29,4 @@
         </div>
     </div>
 @endsection
+

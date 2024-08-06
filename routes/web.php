@@ -3,7 +3,7 @@
 use App\Http\Controllers\DeckController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\FlashcardController; // Import FlashcardController
+use App\Http\Controllers\FlashcardController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
@@ -18,9 +18,21 @@ Route::put('/decks/{deck}', [DeckController::class, 'update'])->name('decks.upda
 Route::put('/decks/{deck}/flashcards', [DeckController::class, 'updateFlashcards'])->name('decks.updateFlashcards');
 Route::delete('/decks/{deck}', [DeckController::class, 'destroy'])->name('decks.destroy');
 
-Route::post('decks/{deck}/flashcards', [FlashcardController::class, 'store'])->name('flashcards.store');
-Route::delete('flashcards/{flashcard}', [FlashcardController::class, 'destroy'])->name('flashcards.destroy');
-Route::get('decks/{deck}/flashcards', [FlashcardController::class, 'show'])->name('flashcards.show');
+// Flashcard routes
+Route::get('/decks/{deck}/flashcards', [FlashcardController::class, 'index'])->name('flashcards.index');
+Route::post('/decks/{deck}/flashcards', [FlashcardController::class, 'store'])->name('flashcards.store');
+Route::get('/flashcards/{flashcard}', [FlashcardController::class, 'show'])->name('flashcards.show');
+Route::delete('/flashcards/{flashcard}', [FlashcardController::class, 'destroy'])->name('flashcards.destroy');
+Route::get('/flashcards/{flashcard}/edit', [FlashcardController::class, 'edit'])->name('flashcards.edit');
+Route::put('/flashcards/{flashcard}', [FlashcardController::class, 'update'])->name('flashcards.update');
+
+// Deck에서 플래시카드를 하나씩 보여주는 라우트
+Route::get('/decks/{deck}/flashcards/view', [FlashcardController::class, 'view'])->name('flashcards.view');
+Route::get('/decks/{deck}/flashcards/{flashcard}/next', [FlashcardController::class, 'next'])->name('flashcards.next');
+Route::get('/decks/{deck}/flashcards/{flashcard}/prev', [FlashcardController::class, 'prev'])->name('flashcards.prev');
+
+// Add the missing create route
+Route::get('/decks/{deck}/flashcards/create', [FlashcardController::class, 'create'])->name('flashcards.create');
 
 Auth::routes();
 
@@ -39,6 +51,5 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
 Route::get('/decks', [DeckController::class, 'index'])->name('decks.index');
 Route::get('/user-decks', [DeckController::class, 'userDecks'])->name('user.decks');
-Route::post('/decks/{deck}/flashcards', [FlashcardController::class, 'store'])->name('flashcards.store');
 
 require __DIR__.'/auth.php';

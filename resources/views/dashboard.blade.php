@@ -67,7 +67,6 @@
                     @endforeach
                 @endif
             </div>
-            <a href="{{ route('decks.create') }}" class="btn btn-success">Create New Deck</a>
         </div>
     </div>
 

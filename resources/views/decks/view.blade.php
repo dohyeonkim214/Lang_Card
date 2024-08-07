@@ -32,7 +32,7 @@
     @endforeach
     @else
         <h3 class="font-bold mx-auto m-5 text-lg">No flashcard yet!</h3>
-        <a href="{{ route('flashcards.create', $deck) }}" class="btn btn-primary">Create Flashcard</a>
+        <!-- <a href="{{ route('flashcards.create', $deck) }}" class="btn btn-primary">Create Flashcard</a> -->
     @endif
 </div>
 @endsection

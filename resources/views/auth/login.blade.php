@@ -44,4 +44,7 @@
             </x-primary-button>
         </div>
     </form>
+    <form class="mt-2 flex justify-end" method="get" action="/">
+        <button class="block w-30 bg-gray-400 text-white p-2 font-bold text-sm rounded-md">BACK TO HOME</button>
+    </form>
 </x-guest-layout>

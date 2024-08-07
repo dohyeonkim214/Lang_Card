@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Deck;
+use App\Models\Language;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DeckController extends Controller
 {
@@ -12,7 +14,24 @@ class DeckController extends Controller
      */
     public function index()
     {
-        //
+        return view('dashboard', [
+            "decks" => Deck::all(),
+            "languages" => Language::all()]);
+    }
+
+    public function userDeck () {
+        return view('userpage.index', [
+            "decks" => Auth::user()->decks,
+            "languages" => Language::all()]);
+    }
+
+    public function dashboard ()
+    {
+        $user = Auth::user();
+        $decks = $user->decks;
+        $flashcards = $user->flashcards;
+
+        return view('userpage.userDashboard', compact('user', 'decks', 'flashcards'));
     }
 
     /**
@@ -52,7 +71,7 @@ class DeckController extends Controller
      */
     public function update(Request $request, Deck $deck)
     {
-        //
+        // 
     }
 
     /**
@@ -60,6 +79,9 @@ class DeckController extends Controller
      */
     public function destroy(Deck $deck)
     {
-        //
+        if (Auth::id() == $deck->user_id) {
+            $deck->delete();
+        }
+        return redirect('/userpage/index');
     }
 }

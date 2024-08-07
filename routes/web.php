@@ -26,10 +26,12 @@ Route::get('/decks/{deck}', [DeckController::class, 'show'])->name('decks.show')
 // 8/6 MAMI added. go to the flashcard list page.
 Route::get('/decks/view/{deck}', [DeckController::class, 'openDeck'])->name('decks.view');
 
-Route::get('/decks/{deck}/edit', [DeckController::class, 'edit'])->name('decks.edit');
+// 8/6 Mami, Modified Link
+Route::get('/userpage/edit/{deck}', [DeckController::class, 'edit'])->name('userpage.edit');
 Route::put('/decks/{deck}', [DeckController::class, 'update'])->name('decks.update');
 Route::put('/decks/{deck}/flashcards', [DeckController::class, 'updateFlashcards'])->name('decks.updateFlashcards');
 Route::delete('/decks/{deck}', [DeckController::class, 'destroy'])->name('decks.destroy');
+
 
 // Flashcard routes
 
@@ -93,15 +95,15 @@ Route::delete('/userpage/index/decks/{deck}', [DeckController::class, 'destroy']
 
 // Junp to update page
 // NEED TO REPLACE
-Route::get('/userpage/sampleupdate/{deck}', function ($deck) {
-    return view('userpage.sampleupdate', ['deck' => $deck]);
-})->name('userpage.sampleupdate');
+// Route::get('/userpage/sampleupdate/{deck}', function ($deck) {
+//     return view('userpage.sampleupdate', ['deck' => $deck]);
+// })->name('userpage.sampleupdate');
 
 // Junp to flahshcard page
 // NEED TO REPLACE
-Route::get('/userpage/sampleflashcard/{deck}', function ($deck) {
-    return view('userpage.sampleflashcard', ['deck' => $deck]);
-})->name('userpage.sampleflashcard');
+// Route::get('/userpage/sampleflashcard/{deck}', function ($deck) {
+//     return view('userpage.sampleflashcard', ['deck' => $deck]);
+// })->name('userpage.sampleflashcard');
 
 
 

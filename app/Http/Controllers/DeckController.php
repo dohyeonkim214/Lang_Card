@@ -72,9 +72,12 @@ class DeckController extends Controller
 
     public function edit(Deck $deck)
     {
+        
         $this->authorize('update', $deck); // Ensure the user can update the deck
+
+        // WE DON'T HAVE CHINESE
         $languages = Language::whereIn('name', ['English', 'Japanese', 'Korean', 'Chinese', 'Spanish', 'French'])->get();        
-        return view('decks.createEdit', compact('deck', 'languages'));
+        return view('userpage.edit', compact('deck', 'languages'));
     }
 
     public function update(Request $request, Deck $deck)

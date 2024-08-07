@@ -24,5 +24,9 @@
     </div>
 
     <a href="{{ route('flashcards.create', $deck) }}" class="btn btn-primary mt-4">Create Flashcard</a>
+
+    <form class="mb-5" method="get" action="{{ route('decks.view', ['deck' => $deck->id]) }}">
+        <button class="block w-full bg-green-400 text-white p-3 font-bold">Back to Flashcard list</button>
+    </form>
 </div>
 </x-app-layout>

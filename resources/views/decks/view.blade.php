@@ -33,8 +33,14 @@
          @endif
     @endif
 
+    @if (Auth::id() == $deck->user_id)
     <form class="mb-5" method="get" action="{{ route('userpage.index') }}">
         <button class="block w-full bg-sky-400 text-white p-3 font-bold">Back to Deck List</button>
     </form>
+    @else
+    <form class="mb-5" method="get" action="{{ route('index') }}">
+        <button class="block w-full bg-sky-400 text-white p-3 font-bold">Back to Deck List</button>
+    </form>
+    @endif
 </div>
 </x-app-layout>

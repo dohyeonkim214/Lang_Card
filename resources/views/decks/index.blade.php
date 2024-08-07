@@ -1,159 +1,147 @@
-
 <x-app-layout>
-    <div class="deck-list">
-        <div>
+    <div class="mt-5 bg-white border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 font-bold h-16 text-2xl flex items-center justify-center">
             <h2>All User's Decks</h2>
         </div>
-        <div class="row">
+    </div>
+        <div class="flex flex-wrap">
             @if ($decks->isEmpty())
-                <div class="col-md-12">
-                    <div class="alert alert-info" role="alert">
-                        No list yet!
-                    </div>
-                </div>
+            <p class="font-bold mx-auto m-5 text-lg">You don't have any Decks yet.</p>
             @else
             @foreach ($decks as $deck)
-                <div class="flashcard-container flex flex-wrap justify-center">
-                    <div class="basis-1/3">
-                        <div class="flashcard bg-white rounded shadow m-2 p-3">
-                            <h5 class="card-title">{{ $deck->title }}</h5>
-                            <a href="{{ route('decks.view', ['deck' => $deck->id]) }}" class="btn btn-primary">View</a>
-                        </div>
+            <div class="basis-1/3 p-6">
+                <div class="bg-white rounded shadow p-6">
+                    <div>
+                        <h5 class="text-2xl">{{ $deck->title }}</h5>
+                        <form class="mt-5" method="get" action="{{ route('decks.view', ['deck' => $deck->id]) }}">
+                            <button class="block w-full bg-green-400 text-white p-3 font-bold">View</button>
+                        </form>
                     </div>
                 </div>
+            </div>
             @endforeach
             @endif
         </div>
 
-        <div class="mt-5">
+    <div class="mt-5 bg-white border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 font-bold h-16 text-2xl flex items-center justify-center">
             <h2>English</h2>
         </div>
-        <div class="row">
-            @if ($decks->isEmpty())
-                <div class="col-md-12">
-                    <div class="alert alert-info" role="alert">
-                        No list yet!
-                    </div>
+    </div>
+    <div class="flex flex-wrap">
+        @if ($decks->isEmpty())
+        <p class="font-bold mx-auto m-5 text-lg">You don't have any Decks yet.</p>
+        @else
+        @foreach ($decks as $deck)
+        <div class="basis-1/3 p-6">
+            <div class="bg-white rounded shadow p-6">
+                <div>
+                    <h5 class="text-2xl">{{ $deck->title }}</h5>
+                    <form class="mt-5" method="get" action="{{ route('decks.view', ['deck' => $deck->id]) }}">
+                        <button class="block w-full bg-green-400 text-white p-3 font-bold">View</button>
+                    </form>
                 </div>
-            @else
-            @foreach ($decks as $deck)
-            @if($deck->language_id == 1)
-                <div class="flashcard-container flex flex-wrap justify-center">
-                    <div class="basis-1/3 p-6">
-                        <div class="flashcard bg-white rounded shadow m-2 p-3">
-                            <h5 class="card-title">{{ $deck->title }}</h5>
-                            <a href="{{ route('decks.view', ['deck' => $deck->id]) }}" class="btn btn-primary">View</a>
-                        </div>
-                    </div>
-                </div>
-            @endif
-            @endforeach
-            @endif
+            </div>
         </div>
+        @endforeach
+        @endif
+    </div>
 
-        <div class="mt-5">
+
+    <div class="mt-5 bg-white border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 font-bold h-16 text-2xl flex items-center justify-center">
             <h2>French</h2>
         </div>
-        <div class="row">
+    </div>
+    <div class="flex flex-wrap">
             @if ($decks->isEmpty())
-                <div class="col-md-12">
-                    <div class="alert alert-info" role="alert">
-                        No list yet!
-                    </div>
-                </div>
+            <p class="font-bold mx-auto m-5 text-lg">You don't have any Decks yet.</p>
             @else
             @foreach ($decks as $deck)
-            @if($deck->language_id == 2)
-                <div class="flashcard-container flex flex-wrap justify-center">
-                    <div class="basis-1/3 p-6">
-                        <div class="flashcard bg-white rounded shadow m-2 p-3">
-                            <h5 class="card-title">{{ $deck->title }}</h5>
-                            <a href="{{ route('decks.view', ['deck' => $deck->id]) }}" class="btn btn-primary">View</a>
-                        </div>
+            <div class="basis-1/3 p-6">
+                <div class="bg-white rounded shadow p-6">
+                    <div>
+                        <h5 class="text-2xl">{{ $deck->title }}</h5>
+                        <form class="mt-5" method="get" action="{{ route('decks.view', ['deck' => $deck->id]) }}">
+                            <button class="block w-full bg-green-400 text-white p-3 font-bold">View</button>
+                        </form>
                     </div>
                 </div>
-            @endif
+            </div>
             @endforeach
             @endif
-        </div>
+    </div>
 
-        <div class="mt-5">
+
+    <div class="mt-5 bg-white border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 font-bold h-16 text-2xl flex items-center justify-center">
             <h2>Spanish</h2>
         </div>
-        <div class="row">
+    </div>
+    <div class="flex flex-wrap">
             @if ($decks->isEmpty())
-                <div class="col-md-12">
-                    <div class="alert alert-info" role="alert">
-                        No list yet!
-                    </div>
-                </div>
+            <p class="font-bold mx-auto m-5 text-lg">You don't have any Decks yet.</p>
             @else
             @foreach ($decks as $deck)
-            @if($deck->language_id == 3)
-                <div class="flashcard-container flex flex-wrap justify-center">
-                    <div class="basis-1/3 p-6">
-                        <div class="flashcard bg-white rounded shadow m-2 p-3">
-                            <h5 class="card-title">{{ $deck->title }}</h5>
-                            <a href="{{ route('decks.view', ['deck' => $deck->id]) }}" class="btn btn-primary">View</a>
-                        </div>
+            <div class="basis-1/3 p-6">
+                <div class="bg-white rounded shadow p-6">
+                    <div>
+                        <h5 class="text-2xl">{{ $deck->title }}</h5>
+                        <form class="mt-5" method="get" action="{{ route('decks.view', ['deck' => $deck->id]) }}">
+                            <button class="block w-full bg-green-400 text-white p-3 font-bold">View</button>
+                        </form>
                     </div>
                 </div>
-            @endif
+            </div>
             @endforeach
             @endif
-        </div>
-                   
+    </div>                   
 
-        <div class="mt-5">
+    <div class="mt-5 bg-white border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 font-bold h-16 text-2xl flex items-center justify-center">
             <h2>Korean</h2>
         </div>
-        <div class="row">
+    </div>
+    <div class="flex flex-wrap">
             @if ($decks->isEmpty())
-                <div class="col-md-12">
-                    <div class="alert alert-info" role="alert">
-                        No list yet!
-                    </div>
-                </div>
+            <p class="font-bold mx-auto m-5 text-lg">You don't have any Decks yet.</p>
             @else
             @foreach ($decks as $deck)
-            @if($deck->language_id == 4)
-                <div class="flashcard-container flex flex-wrap justify-center">
-                    <div class="basis-1/3 p-6">
-                        <div class="flashcard bg-white rounded shadow m-2 p-3">
-                            <h5 class="card-title">{{ $deck->title }}</h5>
-                            <a href="{{ route('decks.view', ['deck' => $deck->id]) }}" class="btn btn-primary">View</a>
-                        </div>
+            <div class="basis-1/3 p-6">
+                <div class="bg-white rounded shadow p-6">
+                    <div>
+                        <h5 class="text-2xl">{{ $deck->title }}</h5>
+                        <form class="mt-5" method="get" action="{{ route('decks.view', ['deck' => $deck->id]) }}">
+                            <button class="block w-full bg-green-400 text-white p-3 font-bold">View</button>
+                        </form>
                     </div>
                 </div>
-            @endif
+            </div>
             @endforeach
             @endif
-        </div>
+    </div>
 
-        <div class="mt-5">
+    <div class="mt-5 bg-white border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 font-bold h-16 text-2xl flex items-center justify-center">
             <h2>Japanese</h2>
         </div>
-        <div class="row">
+    </div>
+    <div class="flex flex-wrap">
             @if ($decks->isEmpty())
-                <div class="col-md-12">
-                    <div class="alert alert-info" role="alert">
-                        No list yet!
-                    </div>
-                </div>
+            <p class="font-bold mx-auto m-5 text-lg">You don't have any Decks yet.</p>
             @else
             @foreach ($decks as $deck)
-            @if($deck->language_id == 5)
-                <div class="flashcard-container flex flex-wrap justify-center">
-                    <div class="basis-1/3 p-6">
-                        <div class="flashcard bg-white rounded shadow m-2 p-3">
-                            <h5 class="card-title">{{ $deck->title }}</h5>
-                            <a href="{{ route('decks.view', ['deck' => $deck->id]) }}" class="btn btn-primary">View</a>
-                        </div>
+            <div class="basis-1/3 p-6">
+                <div class="bg-white rounded shadow p-6">
+                    <div>
+                        <h5 class="text-2xl">{{ $deck->title }}</h5>
+                        <form class="mt-5" method="get" action="{{ route('decks.view', ['deck' => $deck->id]) }}">
+                            <button class="block w-full bg-green-400 text-white p-3 font-bold">View</button>
+                        </form>
                     </div>
                 </div>
-            @endif
+            </div>
             @endforeach
             @endif
-        </div>
-    </div>
+     </div>
 </x-app-layout>

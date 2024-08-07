@@ -1,6 +1,4 @@
-@extends('layouts.app')
-
-@section('content')
+<x-app-layout>
 <div class="container">
     <h1>{{ isset($flashcard) ? 'Edit Flashcard' : 'Create New Flashcard' }}</h1>
     
@@ -34,4 +32,4 @@
         <button type="submit" class="btn btn-primary">{{ isset($flashcard) ? 'Update' : 'Create' }}</button>
     </form>
 </div>
-@endsection
+</x-app-layout>

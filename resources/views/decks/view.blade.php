@@ -32,5 +32,9 @@
         <a href="{{ route('flashcards.create', $deck) }}" class="btn btn-primary">Create Flashcard</a>
          @endif
     @endif
+
+    <form class="mb-5" method="get" action="{{ route('userpage.index') }}">
+        <button class="block w-full bg-sky-400 text-white p-3 font-bold">Back to Deck List</button>
+    </form>
 </div>
 </x-app-layout>

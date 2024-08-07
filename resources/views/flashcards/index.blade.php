@@ -1,6 +1,4 @@
-@extends('layouts.template')
-
-@section('content')
+<x-app-layout>
 <div class="container mt-5">
     <h2>{{ $deck->title }} - Flashcards</h2>
     <div class="mt-4">
@@ -27,4 +25,4 @@
 
     <a href="{{ route('flashcards.create', $deck) }}" class="btn btn-primary mt-4">Create Flashcard</a>
 </div>
-@endsection
+</x-app-layout>

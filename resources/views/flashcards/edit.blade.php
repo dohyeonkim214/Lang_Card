@@ -1,6 +1,4 @@
-@extends('layouts.app')
-
-@section('content')
+<x-app-layout>
 <div class="container">
     <h1>Edit Flashcard</h1>
     
@@ -32,4 +30,4 @@
         <button type="submit" class="btn btn-primary">Update</button>
     </form>
 </div>
-@endsection
+</x-app-layout>

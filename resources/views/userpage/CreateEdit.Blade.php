@@ -1,5 +1,4 @@
-@extends('layouts.template')
-@section('content')
+<x-app-layout>
 <div class="container">
     <form method="POST" action="{{ isset($deck) ? route('decks.update', $deck) : route('decks.store') }}">
         @csrf
@@ -25,4 +24,4 @@
         <button type="submit" class="btn btn-primary">{{ isset($deck) ? 'Update Deck' : 'Create Deck' }}</button>
     </form>
 </div>
-@endsection
+</x-app-layout>

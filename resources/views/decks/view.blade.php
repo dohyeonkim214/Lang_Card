@@ -27,7 +27,10 @@
     @endforeach
     @else
         <h3 class="font-bold mx-auto m-5 text-lg">No flashcard yet!</h3>
-        <!-- <a href="{{ route('flashcards.create', $deck) }}" class="btn btn-primary">Create Flashcard</a> -->
+        @if (Auth::check())
+        <h4>Do you want to create Flashcards?</h4>
+        <a href="{{ route('flashcards.create', $deck) }}" class="btn btn-primary">Create Flashcard</a>
+         @endif
     @endif
 </div>
 </x-app-layout>

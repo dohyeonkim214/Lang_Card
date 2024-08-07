@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Hash;
 Route::get('/', [DeckController::class, 'index'])->name('index');
 
 // Create page (decks/CreateEdit.blade.php)
-Route::get('/decks/create', [DeckController::class, 'create'])->name('decks.create');
+Route::get('/userpage/create', [DeckController::class, 'create'])->name('userpage.create');
 Route::post('/decks', [DeckController::class, 'store'])->name('decks.store');
 
 // What this page? (decks/show.blade.php)
@@ -84,9 +84,9 @@ Route::get('/userpage/index', [DeckController::class, 'userDeck'])->middleware([
 
 // Junp to create/edit page
 // NEED TO REPLACE LINK
-Route::get('/userpage/samplecreate', function () {
-    return view('userpage.samplecreate');
-})->name('userpage.samplecreate');
+// Route::get('/decks/CreateEdit', function () {
+//     return view('decks.CreateEdit');
+// })->name('decks.CreateEdit');
 
 // Using destory function in DeckController to delete a deck
 Route::delete('/userpage/index/decks/{deck}', [DeckController::class, 'destroy'])->middleware(['auth', 'verified']);

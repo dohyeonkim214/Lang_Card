@@ -49,7 +49,7 @@ class DeckController extends Controller
         $userId = Auth::id();
         $userDecks = Deck::where('user_id', $userId)->get();
         $languages = Language::whereIn('name', ['English', 'Japanese', 'Korean', 'Chinese', 'Spanish', 'French'])->get();
-        return view('decks.createEdit', compact('languages', 'userDecks'));
+        return view('userpage.createEdit', compact('languages', 'userDecks'));
     }
 
     public function store(Request $request)
@@ -66,7 +66,8 @@ class DeckController extends Controller
         $deck->language_id = $request->input('language_id');
         $deck->save();
     
-        return redirect()->route('user.decks')->with('success', 'Deck created successfully.');
+        // 8/6 Mami Edited. Return to redirect User's Decks list page.
+        return redirect()->route('userpage.index')->with('success', 'Deck created successfully.');
     }
 
     public function edit(Deck $deck)

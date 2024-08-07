@@ -13,8 +13,7 @@
                         {{ __('Decks') }}
                     </x-nav-link>
 
-                    <!-- NEED TO CHANGE LINK TO GO TO CREATE PAGE-->
-                    <x-nav-link :href="route('userpage.samplecreate')" :active="request()->routeIs('userpage.samplecreate')">
+                    <x-nav-link :href="route('userpage.create')" :active="request()->routeIs('userpage.create')">
                         {{ __('Create New') }}
                     </x-nav-link>
                 </div>

@@ -36,8 +36,6 @@
 <!-- buttons -->
 <div>
     @if (Auth::check() && (Auth::id() == $deck->user_id))
-
-
     <div class="flex flex-wrap justify-center">
         <form class="m-5" method="get" action="{{ route('userpage.index') }}">
             <button class="block w-30 bg-gray-400 text-white p-3 font-bold">< Back to Deck List</button>
@@ -55,7 +53,7 @@
     </form> -->
 
     @else
-    <form class="m-5" method="get" action="{{ route('index') }}">
+    <form class="m-5" method="get" action="{{ route('decks.index') }}">
         <button class="block w-30 bg-gray-400 text-white p-3 font-bold">< Back to Deck List</button>
     </form>
     @endif

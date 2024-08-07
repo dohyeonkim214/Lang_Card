@@ -33,7 +33,7 @@
                     }
                 </style>
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
+                    <a href="{{ route('decks.index') }}">
                     <svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.62 19.15" width="55" height="50">
 
                         <rect class="cls-3" x=".25" y="3.43" width="14.9" height="7.92"/>
@@ -59,16 +59,19 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    <x-nav-link :href="route('decks.index')" :active="request()->routeIs('decks.index')">
                         {{ __('Home') }}
                     </x-nav-link>
+                    @if (Auth::check())
                     <x-nav-link :href="route('userpage.userDashboard')" :active="request()->routeIs('userpage.userDashboard')">
                         {{ __('User Page') }}
                     </x-nav-link>
+                    @endif
                 </div>
             </div>
 
             <!-- Settings Dropdown -->
+@if (Auth::check())
             <div class="hidden sm:flex sm:items-center sm:ms-6">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
@@ -116,11 +119,11 @@
 
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
-        <div class="pt-2 pb-3 space-y-1">
+        <!-- <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
-        </div>
+        </div> -->
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
@@ -147,4 +150,25 @@
             </div>
         </div>
     </div>
+@else
+    @guest
+    @if (Route::has('login'))
+    <nav class="-mx-3 flex flex-1 justify-end">
+        <a
+        href="{{ route('login') }}"
+        class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-black dark:hover:text-gray/30 dark:focus-visible:ring-white">
+        Log in
+        </a>
+    @endif
+
+    @if (Route::has('register'))
+        <a
+        href="{{ route('register') }}"
+        class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-black dark:hover:text-gray/30 dark:focus-visible:ring-white">
+        Register
+        </a>
+    @endif
+    </nav>
+    @endguest
+@endif
 </nav>

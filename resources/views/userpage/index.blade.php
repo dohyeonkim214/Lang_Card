@@ -39,8 +39,7 @@
                             <button class="block w-full bg-sky-400 text-white p-3 font-bold">Update</button>
                         </form>
 
-                        <!-- NEED TO REPLACE LINK -->
-                        <form class="mb-5" method="get" action="{{ route('userpage.sampleflashcard', ['deck' => $deck->id]) }}">
+                        <form class="mb-5" method="get" action="{{ route('decks.view', ['deck' => $deck->id]) }}">
                             <button class="block w-full bg-green-400 text-white p-3 font-bold">Open</button>
                         </form>
                     </div>

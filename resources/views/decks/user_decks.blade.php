@@ -1,3 +1,26 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- WE WILL NOT USE THIS FILE -->
+
+
+
+
+
+
+
+
+
 @extends('layouts.template')
 
 @section('content')

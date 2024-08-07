@@ -1,6 +1,4 @@
-@extends('layouts.app')
-
-@section('content')
+<x-app-layout>
 <div class="container text-center">
     <h1>{{ $deck->title }}</h1>
     
@@ -9,9 +7,6 @@
             {{ session('error') }}
         </div>
     @endif
-
-    {{ $deck }}
-    {{ $flashcards }}
 
     @if($flashcards->count() >0)
     @foreach($flashcards as $flashcard)
@@ -35,4 +30,4 @@
         <!-- <a href="{{ route('flashcards.create', $deck) }}" class="btn btn-primary">Create Flashcard</a> -->
     @endif
 </div>
-@endsection
+</x-app-layout>

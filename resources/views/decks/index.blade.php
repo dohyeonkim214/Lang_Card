@@ -1,10 +1,5 @@
-@extends('layouts.template')
 
-@section('title', 'Decks')
-
-@section('heading', 'User Decks')
-
-@section('content')
+<x-app-layout>
     <div class="deck-list">
         <div>
             <h2>All User's Decks</h2>
@@ -161,4 +156,4 @@
             @endif
         </div>
     </div>
-@endsection
+</x-app-layout>

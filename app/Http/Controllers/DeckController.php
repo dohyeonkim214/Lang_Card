@@ -33,14 +33,15 @@ class DeckController extends Controller
         return view('decks.index', compact('decks', 'deckLanguages', 'deckCardCounts'));
     }
 
-    public function userDecks()
-    {
-        $userId = Auth::id();
-        $userDecks = Deck::where('user_id', $userId)->with('language')->get();
-        $deckLanguages = $userDecks->groupBy('language.name');
+    // 8/6 MAMI Commented out. Maybe we don't need
+    // public function userDecks()
+    // {
+    //     $userId = Auth::id();
+    //     $userDecks = Deck::where('user_id', $userId)->with('language')->get();
+    //     $deckLanguages = $userDecks->groupBy('language.name');
 
-        return view('decks.user_decks', compact('deckLanguages', 'userDecks'));
-    }
+    //     return view('decks.user_decks', compact('deckLanguages', 'userDecks'));
+    // }
 
 
     public function create()
@@ -85,13 +86,14 @@ class DeckController extends Controller
         return redirect()->route('user.decks');
     }
 
-    public function destroy(Deck $deck)
-    {
-        $this->authorize('delete', $deck); // Ensure the user can delete the deck
-        $deck->delete();
+    // 8/6 MAMI commented out. use Mami's destoroy function.
+    // public function destroy(Deck $deck)
+    // {
+    //     $this->authorize('delete', $deck); // Ensure the user can delete the deck
+    //     $deck->delete();
 
-        return redirect()->route('user.decks');
-    }
+    //     return redirect()->route('user.decks');
+    // }
     
     public function show(Deck $deck)
     {
@@ -124,5 +126,38 @@ class DeckController extends Controller
         }
 
         return redirect()->route('decks.show', $deck)->with('success', 'Flashcards updated successfully.');
+    }
+
+
+    // MAMI'S CODE
+
+    // public function index()
+    // {
+    //     return view('dashboard', [
+    //         "decks" => Deck::all(),
+    //         "languages" => Language::all()]);
+    // }
+
+    public function userDeck () {
+        return view('userpage.index', [
+            "decks" => Auth::user()->decks,
+            "languages" => Language::all()]);
+    }
+
+    public function dashboard ()
+    {
+        $user = Auth::user();
+        $decks = $user->decks;
+        $flashcards = $user->flashcards;
+
+        return view('userpage.userDashboard', compact('user', 'decks', 'flashcards'));
+    }
+
+    public function destroy(Deck $deck)
+    {
+        if (Auth::id() == $deck->user_id) {
+            $deck->delete();
+        }
+        return redirect('/userpage/index');
     }
 }

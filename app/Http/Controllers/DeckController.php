@@ -25,6 +25,15 @@ class DeckController extends Controller
             "languages" => Language::all()]);
     }
 
+    public function dashboard ()
+    {
+        $user = Auth::user();
+        $decks = $user->decks;
+        $flashcards = $user->flashcards;
+
+        return view('userpage.userDashboard', compact('user', 'decks', 'flashcards'));
+    }
+
     /**
      * Show the form for creating a new resource.
      */

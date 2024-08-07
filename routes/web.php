@@ -11,7 +11,10 @@ Route::get('/', function () {
 Route::get('/dashboard', [DeckController::class, 'index'])->name('dashboard');
 // Route::get('/dashboard', [DeckController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
-// Using userDeck function in DeckController to get a User's Top Page
+// this is a top page of the login user
+Route::get('/userpage/userDashboard', [DeckController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('userpage.userDashboard');
+
+// Using userDeck function in DeckController to get a User's deck Page
 Route::get('/userpage/index', [DeckController::class, 'userDeck'])->middleware(['auth', 'verified'])->name('userpage.index');
 
 // Junp to create/edit page

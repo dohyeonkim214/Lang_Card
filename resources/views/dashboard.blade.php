@@ -6,12 +6,8 @@
             <h2>Dashboard</h2>
         </div>
     </div>
-
-    <div>
-        <h3>Languages of Decks</h3>
-        @foreach ($decks as $deck)
-        <div></div>
-    </div>
+    
+    <h1>Sample page</h1>
 
     @foreach ($decks as $deck)
     <div>

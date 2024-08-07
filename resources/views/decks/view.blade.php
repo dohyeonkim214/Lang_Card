@@ -10,17 +10,26 @@
         </div>
     @endif
 
-    @if(isset($flashcard))
-        <div class="flashcard-container">
-            <div class="flashcard">
-                <p>{{ $flashcard->english_text }}</p>
-                <p>{{ $flashcard->another_language_text }}</p>
+    {{ $deck }}
+    {{ $flashcards }}
+
+    @if(isset($flashcards))
+    @foreach($flashcards as $flashcard)
+        <div class="flashcard-container flex flex-wrap justify-center">
+            <div class="basis-1/3 p-6">
+                <div class="flashcard bg-white rounded shadow m-5 p-5">
+                    <label>English</label>
+                    <p class="text-2xl">{{ $flashcard->english_text }}</p>
+                    <label>{{ $language->name}}</label>
+                    <p class="text-2xl">{{ $flashcard->second_language_text }}</p>
+                </div>
             </div>
         </div>
-        <div class="navigation-buttons">
+        <!-- <div class="navigation-buttons">
             <a href="{{ route('flashcards.prev', ['deck' => $deck->id, 'flashcard' => $flashcard->id]) }}" class="btn btn-secondary">Previous</a>
             <a href="{{ route('flashcards.next', ['deck' => $deck->id, 'flashcard' => $flashcard->id]) }}" class="btn btn-primary">Next</a>
-        </div>
+        </div> -->
+    @endforeach
     @else
         <p>No flashcard yet!</p>
         <a href="{{ route('flashcards.create', $deck) }}" class="btn btn-primary">Create Flashcard</a>

@@ -9,20 +9,31 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
-Route::get('/', function () {
-    return view('dashboard');
-})->name('dashboard');
+// Route::get('/', function () {
+//     return view('dashboard');
+// })->name('dashboard');
 
+// Home page (decks/index.blade.php)
 Route::get('/', [DeckController::class, 'index'])->name('index');
+
+// Create page (decks/CreateEdit.blade.php)
 Route::get('/decks/create', [DeckController::class, 'create'])->name('decks.create');
 Route::post('/decks', [DeckController::class, 'store'])->name('decks.store');
+
+// What this page? (decks/show.blade.php)
 Route::get('/decks/{deck}', [DeckController::class, 'show'])->name('decks.show');
+
+// 8/6 MAMI added. go to the flashcard list page.
+Route::get('/decks/view/{deck}', [DeckController::class, 'openDeck'])->name('decks.view');
+
 Route::get('/decks/{deck}/edit', [DeckController::class, 'edit'])->name('decks.edit');
 Route::put('/decks/{deck}', [DeckController::class, 'update'])->name('decks.update');
 Route::put('/decks/{deck}/flashcards', [DeckController::class, 'updateFlashcards'])->name('decks.updateFlashcards');
 Route::delete('/decks/{deck}', [DeckController::class, 'destroy'])->name('decks.destroy');
 
 // Flashcard routes
+
+
 Route::get('/decks/{deck}/flashcards', [FlashcardController::class, 'index'])->name('flashcards.index');
 Route::post('/decks/{deck}/flashcards', [FlashcardController::class, 'store'])->name('flashcards.store');
 Route::get('/flashcards/{flashcard}', [FlashcardController::class, 'show'])->name('flashcards.show');

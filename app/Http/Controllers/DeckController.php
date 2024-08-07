@@ -12,6 +12,16 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class DeckController extends Controller
 {
+    // 8/6 MAMI added.
+    // open the selected Deck
+    public function openDeck(Deck $deck) 
+    {
+        $flashcards = Flashcard::where('deck_id', $deck->id)->get();
+        $language = Language::find($deck->language_id);
+        return view('decks.view', compact('deck', 'flashcards', 'language'));
+    }
+
+
     use AuthorizesRequests;
 
     public function index()
@@ -31,6 +41,7 @@ class DeckController extends Controller
 
         return view('decks.user_decks', compact('deckLanguages', 'userDecks'));
     }
+
 
     public function create()
     {

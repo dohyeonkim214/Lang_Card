@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class FlashcardController extends Controller
 {
+
     public function index(Deck $deck)
     {
         $flashcards = Flashcard::where('deck_id', $deck->id)->get();

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container text-center">
     <h1>{{ $deck->title }}</h1>
     
     @if(session('error'))
@@ -13,7 +13,7 @@
     {{ $deck }}
     {{ $flashcards }}
 
-    @if(isset($flashcards))
+    @if($flashcards->count() >0)
     @foreach($flashcards as $flashcard)
         <div class="flashcard-container flex flex-wrap justify-center">
             <div class="basis-1/3 p-6">
@@ -31,7 +31,7 @@
         </div> -->
     @endforeach
     @else
-        <p>No flashcard yet!</p>
+        <h3 class="font-bold mx-auto m-5 text-lg">No flashcard yet!</h3>
         <a href="{{ route('flashcards.create', $deck) }}" class="btn btn-primary">Create Flashcard</a>
     @endif
 </div>

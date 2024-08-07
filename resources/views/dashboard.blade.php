@@ -1,9 +1,16 @@
 <!-- Sample Dashboard -->
 
 <x-app-layout>
-    <div class="container">
-        <h1>Sample Dashboard</h1>
-        <p>This page is a Sample page. Will be replaced when marging.</p>
+    <div class="mt-5 bg-white border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 font-bold h-16 text-2xl flex items-center justify-center">
+            <h2>Dashboard</h2>
+        </div>
+    </div>
+
+    <div>
+        <h3>Languages of Decks</h3>
+        @foreach ($decks as $deck)
+        <div></div>
     </div>
 
     @foreach ($decks as $deck)

@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Hash;
 // })->name('dashboard');
 
 // Home page (decks/index.blade.php)
-Route::get('/', [DeckController::class, 'index'])->name('index');
+Route::get('/', [DeckController::class, 'index'])->name('decks.index');
 
 // Create page (decks/CreateEdit.blade.php)
 Route::get('/userpage/create', [DeckController::class, 'create'])->name('userpage.create');
@@ -27,7 +27,13 @@ Route::get('/decks/{deck}', [DeckController::class, 'show'])->name('decks.show')
 Route::get('/decks/view/{deck}', [DeckController::class, 'openDeck'])->name('decks.view');
 
 // 8/6 Mami, Modified Link
-Route::get('/userpage/edit/{deck}', [DeckController::class, 'edit'])->name('userpage.edit');
+// Route::get('/userpage/edit/{deck}', [DeckController::class, 'edit'])->name('userpage.edit');
+
+// Show the flashcard.index page so that user can edit from here
+Route::get('/flashcards/index', function () {
+        return view('flashcards.index');
+    })->name('flashcards.index');
+
 Route::put('/decks/{deck}', [DeckController::class, 'update'])->name('decks.update');
 Route::put('/decks/{deck}/flashcards', [DeckController::class, 'updateFlashcards'])->name('decks.updateFlashcards');
 Route::delete('/decks/{deck}', [DeckController::class, 'destroy'])->name('decks.destroy');

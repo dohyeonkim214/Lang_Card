@@ -32,9 +32,9 @@
                             <button class="block w-full bg-red-400 text-white p-3 font-bold">Delete</button>
                         </form>
                         
-                        <form class="mb-5" method="get" action="{{ route('userpage.edit', ['deck' => $deck->id]) }}">
+                        <!-- <form class="mb-5" method="get" action="{{ route('flashcards.index', ['deck' => $deck->id]) }}">
                             <button class="block w-full bg-sky-400 text-white p-3 font-bold">Update</button>
-                        </form>
+                        </form> -->
 
                         <form class="mb-5" method="get" action="{{ route('decks.view', ['deck' => $deck->id]) }}">
                             <button class="block w-full bg-green-400 text-white p-3 font-bold">Open</button>
@@ -73,9 +73,9 @@
                             <button class="block w-full bg-red-400 text-white p-3 font-bold">Delete</button>
                         </form>
                         
-                        <form class="mb-5" method="get" action="{{ route('userpage.edit', ['deck' => $deck->id]) }}">
+                        <!-- <form class="mb-5" method="get" action="{{ route('flashcards.index', ['deck' => $deck->id]) }}">
                             <button class="block w-full bg-sky-400 text-white p-3 font-bold">Update</button>
-                        </form>
+                        </form> -->
 
                         <form class="mb-5" method="get" action="{{ route('decks.view', ['deck' => $deck->id]) }}">
                             <button class="block w-full bg-green-400 text-white p-3 font-bold">Open</button>
@@ -114,9 +114,9 @@
                             <button class="block w-full bg-red-400 text-white p-3 font-bold">Delete</button>
                         </form>
                         
-                        <form class="mb-5" method="get" action="{{ route('userpage.edit', ['deck' => $deck->id]) }}">
+                        <!-- <form class="mb-5" method="get" action="{{ route('flashcards.index', ['deck' => $deck->id]) }}">
                             <button class="block w-full bg-sky-400 text-white p-3 font-bold">Update</button>
-                        </form>
+                        </form> -->
 
                         <form class="mb-5" method="get" action="{{ route('decks.view', ['deck' => $deck->id]) }}">
                             <button class="block w-full bg-green-400 text-white p-3 font-bold">Open</button>
@@ -155,9 +155,9 @@
                             <button class="block w-full bg-red-400 text-white p-3 font-bold">Delete</button>
                         </form>
                         
-                        <form class="mb-5" method="get" action="{{ route('userpage.edit', ['deck' => $deck->id]) }}">
+                        <!-- <form class="mb-5" method="get" action="{{ route('flashcards.index', ['deck' => $deck->id]) }}">
                             <button class="block w-full bg-sky-400 text-white p-3 font-bold">Update</button>
-                        </form>
+                        </form> -->
 
                         <form class="mb-5" method="get" action="{{ route('decks.view', ['deck' => $deck->id]) }}">
                             <button class="block w-full bg-green-400 text-white p-3 font-bold">Open</button>
@@ -196,9 +196,9 @@
                             <button class="block w-full bg-red-400 text-white p-3 font-bold">Delete</button>
                         </form>
                         
-                        <form class="mb-5" method="get" action="{{ route('userpage.edit', ['deck' => $deck->id]) }}">
+                        <!-- <form class="mb-5" method="get" action="{{ route('flashcards.index', ['deck' => $deck->id]) }}">
                             <button class="block w-full bg-sky-400 text-white p-3 font-bold">Update</button>
-                        </form>
+                        </form> -->
 
                         <form class="mb-5" method="get" action="{{ route('decks.view', ['deck' => $deck->id]) }}">
                             <button class="block w-full bg-green-400 text-white p-3 font-bold">Open</button>
@@ -237,9 +237,9 @@
                             <button class="block w-full bg-red-400 text-white p-3 font-bold">Delete</button>
                         </form>
                         
-                        <form class="mb-5" method="get" action="{{ route('userpage.edit', ['deck' => $deck->id]) }}">
+                        <!-- <form class="mb-5" method="get" action="{{ route('flashcards.index', ['deck' => $deck->id]) }}">
                             <button class="block w-full bg-sky-400 text-white p-3 font-bold">Update</button>
-                        </form>
+                        </form> -->
 
                         <form class="mb-5" method="get" action="{{ route('decks.view', ['deck' => $deck->id]) }}">
                             <button class="block w-full bg-green-400 text-white p-3 font-bold">Open</button>

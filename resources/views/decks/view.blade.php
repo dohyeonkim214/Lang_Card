@@ -36,12 +36,24 @@
 <!-- buttons -->
 <div>
     @if (Auth::check() && (Auth::id() == $deck->user_id))
+
+    <!-- These buttons should be moved in "Update" page. -->
+    <div class="flex flex-wrap justify-center">
+        <form class="m-5" method="get" action="{{ route('userpage.index') }}">
+            <button class="block w-30 bg-gray-400 text-white p-3 font-bold">< Back to Deck List</button>
+        </form>
+        <form class="m-5" method="get" action="{{ route('flashcards.index', $deck) }}">
+            <button class="block w-30 bg-green-400 text-white p-3 font-bold">Manage Flashcards</button>
+        </form>
+        <form class="m-5" method="get" action="{{ route('flashcards.create', $deck) }}">
+            <button class="block w-30 bg-sky-400 text-white p-3 font-bold">Create a New Flashcard</button>
+        </form>
+    </div>
+    
     <form class="m-5" method="get" action="{{ route('userpage.index') }}">
         <button class="block w-30 bg-gray-400 text-white p-3 font-bold">< Back to Deck List</button>
     </form>
-    <form class="m-5" method="get" action="{{ route('flashcards.create', $deck) }}">
-        <button class="block w-30 bg-sky-400 text-white p-3 font-bold">Create Flashcard</button>
-    </form>
+
     @else
     <form class="m-5" method="get" action="{{ route('index') }}">
         <button class="block w-30 bg-gray-400 text-white p-3 font-bold">< Back to Deck List</button>

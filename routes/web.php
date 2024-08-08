@@ -48,6 +48,8 @@ Route::get('/userpage/create', [DeckController::class, 'create'])->name('userpag
 // Create new deck
 Route::post('/decks', [DeckController::class, 'store'])->name('decks.store');
 
+// Update Deck name, complete condition
+Route::put('/userpage/index/decks/{deck}', [DeckController::class, 'update'])->middleware(['auth', 'verified'])->name('decks.update');;
 
 
 

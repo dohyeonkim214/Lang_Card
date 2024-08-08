@@ -2,13 +2,38 @@
 
 <div class="mt-5 bg-white border-b border-gray-100">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 font-bold h-16 text-2xl flex items-center justify-center">
-        <h2>{{ $deck->title }} - Flashcards</h2>
+        <h2>Selected Deck: {{ $deck->name }}</h2>
+    </div>
+</div>
+<div class="m-20 mt-5">
+    <form action="{{ route('decks.update', $deck->id) }}" method="post">
+        @csrf
+        @method('put')
+        <div>
+            <label class="block text-gray-700 text-sm font-bold mb-2">Deck Title</label>
+            <input type="text" id="name" name="name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" value="{{ $deck->name }}" required>
+        </div>
+        <div class="mt-5 flex flex-wrap">
+            <label class="block text-gray-700 text-sm font-bold mb-2">Complete?</label>
+            <input type="checkbox" id="completed" name="completed" class="ml-3" {{ $deck->completed ? 'checked' : '' }}>
+        </div>
+        <div class="flex flex-wrap justify-center">
+            <button type="submit" class="block w-30 bg-sky-400 text-white p-3 font-bold">Update the Deck</button>
+        </div>
+    </form>
+</div>
+
+<div class="mt-5 bg-white border-b border-gray-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 font-bold h-16 text-2xl flex items-center justify-center">
+        <h2>Flashcards</h2>
     </div>
 </div>
 
 <div class="mt-10 m-20">
     @if ($flashcards->isEmpty())
-        <p>No flashcards yet!</p>
+    <div class="mx-auto text-center">
+        <h3 class="font-bold m-5 text-lg">No flashcards yet!</h3>
+    </div>
     @else
         <ul>
         @foreach ($flashcards as $flashcard)

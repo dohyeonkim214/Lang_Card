@@ -57,6 +57,7 @@ class FlashcardController extends Controller
         return view('flashcards.create', compact('deck', 'languages'));
     }
 
+    // Create a new flashcard
     public function store(Request $request, Deck $deck)
     {
         $request->validate([

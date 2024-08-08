@@ -87,6 +87,17 @@ class DeckController extends Controller
         return redirect()->route('userpage.index')->with('success', 'Deck created successfully.');
     }
 
+    public function update (Request $request, Deck $deck)
+    {
+        if (Auth::id() == $deck->user_id) {
+            $deck->name = $request->name;
+            $deck->completed = $request->has('completed');
+            $deck->save();
+        }
+
+        return redirect()->Route('userpage.index');
+    }
+
 
 
 

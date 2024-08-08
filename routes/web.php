@@ -56,68 +56,6 @@ Route::post('/decks', [DeckController::class, 'store'])->name('decks.store');
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Route::put('/decks/{deck}', [DeckController::class, 'update'])->name('decks.update');
-// Route::put('/decks/{deck}/flashcards', [DeckController::class, 'updateFlashcards'])->name('decks.updateFlashcards');
-Route::delete('/decks/{deck}', [DeckController::class, 'destroy'])->name('decks.destroy');
-
-
-// Flashcard routes
-
-
-
-
-Route::get('/flashcards/{flashcard}', [FlashcardController::class, 'show'])->name('flashcards.show');
-
-
-
-
-// Deck에서 플래시카드를 하나씩 보여주는 라우트
-Route::get('/decks/{deck}/flashcards/view', [FlashcardController::class, 'view'])->name('flashcards.view');
-Route::get('/decks/{deck}/flashcards/{flashcard}/next', [FlashcardController::class, 'next'])->name('flashcards.next');
-Route::get('/decks/{deck}/flashcards/{flashcard}/prev', [FlashcardController::class, 'prev'])->name('flashcards.prev');
-
-
-
-
-
-Route::get('/create-user', function () {
-    User::create([
-        'name' => 'Test User',
-        'email' => 'test@example.com',
-        'password' => Hash::make('password'),
-    ]);
-    return 'User created!';
-});
-
-Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth'])->name('dashboard');
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
-Route::get('/decks', [DeckController::class, 'index'])->name('decks.index');
-
-
-
-
-
-
-
-
-
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

@@ -35,8 +35,8 @@
     <form class="m-5" method="get" action="{{ route('flashcards.create', $deck) }}">
         <button class="block w-30 bg-sky-400 text-white p-3 font-bold">Create Flashcard</button>
     </form>
-    <form class="m-5" method="get" action="{{ route('decks.view', ['deck' => $deck->id]) }}">
-        <button class="block w-30 bg-gray-400 text-white p-3 font-bold">< Back to Flashcard List</button>
+    <form class="m-5" method="get" action="{{ route('userpage.index') }}">
+        <button class="block w-30 bg-gray-400 text-white p-3 font-bold">< Back to Deck List</button>
     </form>
 </div>
 </x-app-layout>

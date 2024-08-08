@@ -36,5 +36,10 @@
 
         <button type="submit" class="mt-10 block w-full bg-sky-400 text-white p-3 font-bold">{{ isset($flashcard) ? 'Update' : 'Create' }}</button>
     </form>
+
+    <form class="m-5" method="get" action="{{ route('flashcards.index', ['deck' => $deck->id]) }}">
+        <button class="block w-30 bg-gray-400 text-white p-3 font-bold">< Back to Manage Page</button>
+    </form>
 </div>
 </x-app-layout>
+

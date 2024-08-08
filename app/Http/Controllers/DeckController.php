@@ -12,18 +12,9 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class DeckController extends Controller
 {
-    // 8/6 MAMI added.
-    // open the selected Deck
-    public function openDeck(Deck $deck) 
-    {
-        $flashcards = Flashcard::where('deck_id', $deck->id)->get();
-        $language = Language::find($deck->language_id);
-        return view('decks.view', compact('deck', 'flashcards', 'language'));
-    }
-
-
     use AuthorizesRequests;
 
+    // Home page. Show the all decks stored in DB
     public function index()
     {
         $decks = Deck::all();
@@ -33,17 +24,42 @@ class DeckController extends Controller
         return view('decks.index', compact('decks', 'deckLanguages', 'deckCardCounts'));
     }
 
-    // 8/6 MAMI Commented out. Maybe we don't need
-    // public function userDecks()
-    // {
-    //     $userId = Auth::id();
-    //     $userDecks = Deck::where('user_id', $userId)->with('language')->get();
-    //     $deckLanguages = $userDecks->groupBy('language.name');
+    // 8/6 MAMI added.
+    // open the selected Deck
+    public function openDeck(Deck $deck) 
+    {
+        $flashcards = Flashcard::where('deck_id', $deck->id)->get();
+        $language = Language::find($deck->language_id);
+        return view('decks.view', compact('deck', 'flashcards', 'language'));
+    }
 
-    //     return view('decks.user_decks', compact('deckLanguages', 'userDecks'));
-    // }
+    // User's dashboard page. Show the num of Dacks/Flashcards.
+    public function dashboard ()
+    {
+        $user = Auth::user();
+        $decks = $user->decks;
+        $flashcards = $user->flashcards;
 
+        return view('userpage.userDashboard', compact('user', 'decks', 'flashcards'));
+    }
 
+    // User's Decks Page. Show the all Decks login user created
+    public function userDeck () {
+        return view('userpage.index', [
+            "decks" => Auth::user()->decks,
+            "languages" => Language::all()]);
+    }
+
+    // Delete selected deck
+    public function destroy(Deck $deck)
+    {
+        if (Auth::id() == $deck->user_id) {
+            $deck->delete();
+        }
+        return redirect('/userpage/index');
+    }
+
+    // Create deck page
     public function create()
     {
         $userId = Auth::id();
@@ -52,6 +68,7 @@ class DeckController extends Controller
         return view('userpage.createEdit', compact('languages', 'userDecks'));
     }
 
+    // Create a new Deck
     public function store(Request $request)
     {
         $request->validate([
@@ -69,6 +86,47 @@ class DeckController extends Controller
         // 8/6 Mami Edited. Return to redirect User's Decks list page.
         return redirect()->route('userpage.index')->with('success', 'Deck created successfully.');
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+    // 8/6 MAMI Commented out. Maybe we don't need
+    // public function userDecks()
+    // {
+    //     $userId = Auth::id();
+    //     $userDecks = Deck::where('user_id', $userId)->with('language')->get();
+    //     $deckLanguages = $userDecks->groupBy('language.name');
+
+    //     return view('decks.user_decks', compact('deckLanguages', 'userDecks'));
+    // }
+
+
+
+
+
 
     public function edit(Deck $deck)
     {
@@ -142,26 +200,8 @@ class DeckController extends Controller
     //         "languages" => Language::all()]);
     // }
 
-    public function userDeck () {
-        return view('userpage.index', [
-            "decks" => Auth::user()->decks,
-            "languages" => Language::all()]);
-    }
 
-    public function dashboard ()
-    {
-        $user = Auth::user();
-        $decks = $user->decks;
-        $flashcards = $user->flashcards;
 
-        return view('userpage.userDashboard', compact('user', 'decks', 'flashcards'));
-    }
 
-    public function destroy(Deck $deck)
-    {
-        if (Auth::id() == $deck->user_id) {
-            $deck->delete();
-        }
-        return redirect('/userpage/index');
-    }
+
 }

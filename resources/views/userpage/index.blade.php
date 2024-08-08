@@ -1,6 +1,4 @@
-
-
-<!-- User's Top Page -->
+<!-- User's Decks Page -->
 <x-app-layout>
     <!-- Display User's Decks -->
         <div class="mt-5 bg-white border-b border-gray-100">
@@ -31,10 +29,10 @@
                             @method('delete')
                             <button class="block w-full bg-red-400 text-white p-3 font-bold">Delete</button>
                         </form>
-                        
-                        <!-- <form class="mb-5" method="get" action="{{ route('flashcards.index', ['deck' => $deck->id]) }}">
-                            <button class="block w-full bg-sky-400 text-white p-3 font-bold">Update</button>
-                        </form> -->
+
+                        <form class="mb-5" method="get" action="{{ route('flashcards.index', $deck) }}">
+                            <button class="block w-30 bg-sky-400 text-white p-3 font-bold">Manage</button>
+                        </form>
 
                         <form class="mb-5" method="get" action="{{ route('decks.view', ['deck' => $deck->id]) }}">
                             <button class="block w-full bg-green-400 text-white p-3 font-bold">Open</button>

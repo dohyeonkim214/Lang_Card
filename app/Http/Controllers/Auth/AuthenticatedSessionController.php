@@ -22,21 +22,15 @@ class AuthenticatedSessionController extends Controller
     /**
      * Handle an incoming authentication request.
      */
-    public function store(LoginRequest $request)
+    public function store(LoginRequest $request): RedirectResponse
     {
-        $credentials = $request->validated();
+        $request->authenticate();
 
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
+        $request->session()->regenerate();
 
-            // return redirect()->intended('/');
-            return redirect()->intended('dashboard');
-        }
-
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ])->onlyInput('email');
+        return redirect()->intended(route('decks.index', absolute: false));
     }
+
     /**
      * Destroy an authenticated session.
      */

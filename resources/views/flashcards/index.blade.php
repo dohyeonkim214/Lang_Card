@@ -38,7 +38,21 @@
         <ul>
         @foreach ($flashcards as $flashcard)
             <li class="m-3 bg-white p-5 text-center">
-                <span>{{ $flashcard->another_language_text }} - {{ $flashcard->english_text }}</span>
+                <div>
+                    <label class="block text-gray-700 text-sm font-bold mb-2">Contents</label>
+                    <span>{{ $flashcard->another_language_text }} - {{ $flashcard->english_text }}</span>
+                </div>
+                <div class="mt-5">
+                    <label class="block text-gray-700 text-sm font-bold mb-2">Decks</label>
+                    <ul>
+                        @foreach ($decks as $deck)
+                        @if (($deck->id == $flashcard->deck_id) || ($deck->id == $flashcard->second_deck_id) ||($deck->id == $flashcard->third_deck_id))
+                        <li>{{ $deck->name}} </li>
+                        @endif
+                        @endforeach
+                    </ul>
+                </div>
+
                 <!-- buttons -->
                 <div class="" role="group">
                     <form class="m-5" method="get" action="{{ route('flashcards.edit', $flashcard) }}">

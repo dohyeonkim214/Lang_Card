@@ -16,14 +16,16 @@ class FlashcardController extends Controller
     {
         $flashcards = Flashcard::where('deck_id', $deck->id)->get();
         $languages = Language::all();
-        return view('flashcards.index', compact('deck', 'flashcards', 'languages'));
+        $decks = Deck::all();
+        return view('flashcards.index', compact('deck', 'flashcards', 'languages', 'decks'));
     }
 
     // show the flashcard edit page
     public function edit(Flashcard $flashcard)
     {
+        $decks = Deck::all();
         $languages = Language::all();
-        return view('flashcards.edit', compact('flashcard', 'languages'));
+        return view('flashcards.edit', compact('flashcard', 'decks', 'languages'));
     }
 
     // update the flashcard
@@ -36,7 +38,7 @@ class FlashcardController extends Controller
         ]);
 
         $flashcard->english_text = $request->english_text;
-        $flashcard->another_language_text = $request->another_language_text;
+        $flashcard->second_language_text = $request->second_language_text;
         $flashcard->language_id = $request->language_id;
         $flashcard->save();
 
@@ -53,8 +55,9 @@ class FlashcardController extends Controller
     // Show the flashcard create page
     public function create(Deck $deck)
     {
+        $decks = Deck::all();
         $languages = Language::all();
-        return view('flashcards.create', compact('deck', 'languages'));
+        return view('flashcards.create', compact('deck', 'decks', 'languages'));
     }
 
     // Create a new flashcard
@@ -63,13 +66,18 @@ class FlashcardController extends Controller
         $request->validate([
             'english_text' => 'required|string|max:255',
             'another_language_text' => 'required|string|max:255',
-            'language_id' => 'required|exists:languages,id'
+            'language_id' => 'required|exists:languages,id',
+            'deck_id1' => 'required|exists:decks,id',
+            'deck_id2' => 'exists:decks,id',
+            'deck_id3' => 'exists:decks,id'
         ]);
 
         $flashcard = new Flashcard();
         $flashcard->english_text = $request->english_text;
-        $flashcard->another_language_text = $request->another_language_text;
-        $flashcard->deck_id = $deck->id;
+        $flashcard->second_language_text = $request->second_language_text;
+        $flashcard->deck_id = $request->deck_id1;
+        $flashcard->second_deck_id = $request->deck_id2;
+        $flashcard->third_deck_id = $request->deck_id3;
         $flashcard->user_id = auth()->id();
         $flashcard->language_id = $request->language_id;
         $flashcard->save();

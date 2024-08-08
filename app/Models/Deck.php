@@ -14,8 +14,8 @@ class Deck extends Model
     public function user () : BelongsTo {
         return $this->belongsTo(User::class);
     }
-    public function flashcards () : BelongsToMany {
-        return $this->belongsToMany(Flashcard::class);
+    public function flashcards () {
+        return $this->belongsToMany(Flashcard::class, 'deck_flashcard');
     }
     public function language () : BelongsTo {
         return $this->belongsTo(Language::class);

@@ -57,9 +57,26 @@ class FlashcardController extends Controller
         return view('flashcards.create', compact('deck', 'languages'));
     }
 
+    public function store(Request $request, Deck $deck)
+    {
+        $request->validate([
+            'english_text' => 'required|string|max:255',
+            'another_language_text' => 'required|string|max:255',
+            'language_id' => 'required|exists:languages,id'
+        ]);
+
+        $flashcard = new Flashcard();
+        $flashcard->english_text = $request->english_text;
+        $flashcard->another_language_text = $request->another_language_text;
+        $flashcard->deck_id = $deck->id;
+        $flashcard->user_id = auth()->id();
+        $flashcard->language_id = $request->language_id;
+        $flashcard->save();
+
+        return redirect()->route('flashcards.index', $deck)->with('success', 'Flashcard added successfully.');
+    }
 
 
 
 
-    
 }

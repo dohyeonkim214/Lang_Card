@@ -23,7 +23,7 @@ class FlashcardController extends Controller
     // show the flashcard edit page
     public function edit(Flashcard $flashcard)
     {
-        $decks = Deck::all();
+        $decks = Deck::where('user_id', Auth::id())->get();
         $languages = Language::all();
         return view('flashcards.edit', compact('flashcard', 'decks', 'languages'));
     }
@@ -61,7 +61,7 @@ class FlashcardController extends Controller
     // Show the flashcard create page
     public function create(Deck $deck)
     {
-        $decks = Deck::all();
+        $decks = Deck::where('user_id', Auth::id())->get();
         $languages = Language::all();
         return view('flashcards.create', compact('deck', 'decks', 'languages'));
     }

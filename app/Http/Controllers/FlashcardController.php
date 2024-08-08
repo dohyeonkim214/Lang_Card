@@ -34,12 +34,18 @@ class FlashcardController extends Controller
         $request->validate([
             'english_text' => 'required|string|max:255',
             'another_language_text' => 'required|string|max:255',
-            'language_id' => 'required|exists:languages,id'
+            'language_id' => 'required|exists:languages,id',
+            'deck_id1' => 'required|exists:decks,id',
+            'deck_id2' => 'exists:decks,id',
+            'deck_id3' => 'exists:decks,id'
         ]);
 
         $flashcard->english_text = $request->english_text;
         $flashcard->second_language_text = $request->second_language_text;
         $flashcard->language_id = $request->language_id;
+        $flashcard->deck_id = $request->deck_id1;
+        $flashcard->second_deck_id = $request->deck_id2;
+        $flashcard->third_deck_id = $request->deck_id3;
         $flashcard->save();
 
         return redirect()->route('flashcards.index', $flashcard->deck_id)->with('success', 'Flashcard updated successfully.');

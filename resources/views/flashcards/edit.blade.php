@@ -21,7 +21,7 @@
         </div>
 
         <div class="form-group">
-            <label for="language_id" class="block text-gray-700 text-sm font-bold mb-2">Language</label>
+            <label for="language_id" class="block text-gray-700 text-sm font-bold mb-2">Second Language</label>
             <select name="language_id" id="language_id" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
                 @foreach($languages as $language)
                     <option value="{{ $language->id }}" {{ $flashcard->language_id == $language->id ? 'selected' : '' }}>
@@ -30,6 +30,32 @@
                 @endforeach
             </select>
         </div>
+
+        <div class="form-group m-3">
+            <label class="block text-gray-700 text-sm font-bold mb-2">Decks</label>
+            <select name="deck_id1" id="deck_id1" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                @foreach($decks as $deck)
+                <option value="{{ $deck->id }}" {{ (isset($deck) && $deck->deck_id == $deck->id) ? 'selected' : '' }}>{{ $deck->name }}</option>
+                @endforeach
+            </select>
+
+            <select name="deck_id2" id="deck_id2" class="mt-2 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            <option>Select...</option>
+                @foreach($decks as $deck)
+                    <option value="{{ $deck->id }}">{{ $deck->name }}
+                    </option>
+                @endforeach
+            </select>
+
+            <select name="deck_id3" id="deck_id3" class="mt-2 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            <option>Select...</option>
+                @foreach($decks as $deck)
+                    <option value="{{ $deck->id }}">{{ $deck->name }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+
 
         <button type="submit" class="mt-10 block w-full bg-sky-400 text-white p-3 font-bold">Update</button>
     </form>

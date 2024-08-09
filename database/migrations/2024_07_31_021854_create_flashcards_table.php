@@ -17,9 +17,9 @@ return new class extends Migration
             $table->text('second_language_text');
             $table->foreignId('language_id')->constrained()->onDelete('cascade');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('deck_id')->constrained()->onDelete('cascade');
-            $table->foreignId('second_deck_id')->constrained()->onDelete('cascade');
-            $table->foreignId('third_deck_id')->constrained()->onDelete('cascade');
+            $table->foreignId('deck_id')->constrained('decks')->onDelete('cascade');
+            $table->foreignId('second_deck_id')->nullable()->constrained('decks')->onDelete('cascade');
+            $table->foreignId('third_deck_id')->nullable()->constrained('decks')->onDelete('cascade');
             $table->timestamps();
         });
     }

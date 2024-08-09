@@ -11,19 +11,12 @@ class Flashcard extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'english_text', 
-        'second_language_text',
-        'user_id',
-        'language_id',
-    ];
-
     public function user () : BelongsTo {
         return $this->belongsTo(User::class);
     }
 
-    public function decks () {
-        return $this->belongsToMany(Deck::class, 'deck_flashcard');
+    public function decks () : BelongsToMany {
+        return $this->belongsToMany(Deck::class);
     }
 
     public function language () : BelongsTo {

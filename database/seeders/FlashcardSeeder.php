@@ -13,6 +13,6 @@ class FlashcardSeeder extends Seeder
      */
     public function run(): void
     {
-        Flashcard::factory()->count(15)->create();
+        Flashcard::factory()->count(30)->create();
     }
 }

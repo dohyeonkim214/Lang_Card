@@ -7,14 +7,12 @@
 </div>
 
 <div class="m-20">
-    <form method="POST" action="{{ isset($deck) ? route('decks.update', $deck) : route('decks.store') }}" class="m-20">
+    <form method="POST" action="{{ route('decks.store') }}" class="m-20">
         @csrf
-        @if(isset($deck))
-            @method('PUT')
-        @endif
+        @method('POST')
         <div class="m-3">
             <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Deck Title</label>
-            <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" name="name" value="{{ old('name', $deck->name ?? '') }}" required>
+            <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" name="name" required>
         </div>
 
         <div class="m-3">
@@ -27,7 +25,7 @@
             </select>
         </div>
 
-        <button type="submit" class="mt-10 block w-full bg-sky-400 text-white p-3 font-bold">{{ isset($deck) ? 'Update Deck' : 'Create Deck' }}</button>
+        <button type="submit" class="mt-10 block w-full bg-sky-400 text-white p-3 font-bold">Create Deck</button>
     </form>
 </div>
 </x-app-layout>

@@ -18,10 +18,7 @@ class DeckController extends Controller
     public function index()
     {
         $decks = Deck::all();
-        $deckLanguages = Language::withCount('decks')->get();
-        $deckCardCounts = Deck::withCount('flashcards')->get();
-        
-        return view('decks.index', compact('decks', 'deckLanguages', 'deckCardCounts'));
+        return view('decks.index', compact('decks'));
     }
 
     // 8/6 MAMI added.
@@ -92,6 +89,8 @@ class DeckController extends Controller
     public function update (Request $request, Deck $deck)
     {
         if (Auth::id() == $deck->user_id) {
+            $request->validate(['name' => 'required|string|max:255']);
+            
             $deck->name = $request->name;
             $deck->completed = $request->has('completed');
             $deck->save();

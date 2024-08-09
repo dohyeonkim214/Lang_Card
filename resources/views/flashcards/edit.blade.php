@@ -26,23 +26,21 @@
             <small>Only {{ $language->language_name }} decks show in the selection.</small>
             <select name="deck_id" id="deck_id" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
                 @foreach($decks as $deck)
-                <option value="{{ $deck->id }}" {{ (isset($deck) && $deck->deck_id == $deck->id) ? 'selected' : '' }}>{{ $deck->name }}</option>
+                <option value="{{ $deck->id }}" {{ (isset($flashcard) && $flashcard->deck_id == $deck->id) ? 'selected' : '' }}>{{ $deck->name }}</option>
                 @endforeach
             </select>
 
             <select name="second_deck_id" id="second_deck_id" class="mt-2 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
             <option value="" >Select...</option>
                 @foreach($decks as $deck)
-                    <option value="{{ $deck->id }}">{{ $deck->name }}
-                    </option>
+                <option value="{{ $deck->id }}" {{ (isset($flashcard) && $flashcard->second_deck_id == $deck->id) ? 'selected' : '' }}>{{ $deck->name }}</option>
                 @endforeach
             </select>
 
             <select name="third_deck_id" id="third_deck_id" class="mt-2 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
             <option value="">Select...</option>
                 @foreach($decks as $deck)
-                    <option value="{{ $deck->id }}">{{ $deck->name }}
-                    </option>
+                <option value="{{ $deck->id }}" {{ (isset($flashcard) && $flashcard->third_deck_id == $deck->id) ? 'selected' : '' }}>{{ $deck->name }}</option>
                 @endforeach
             </select>
         </div>

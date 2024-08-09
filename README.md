@@ -76,28 +76,3 @@ Create page for flashcard.
 ### Create New
 - Able to create a new Deck by filling *Deck Title* and *Language*.
 
-
-
-
-
-
-
-
-
-
-## In Navigation bar
-- Logo, Link for each page (Only show if user login), Login/out button
-
-## Home Page
-- Search bar (Not mandatory)
-- List of Decks separated by languages
-
-## User's Top Page (THIS IS JUST MY IDEA, WILL REPLACE FROM YOUR IDEA)
-Similar to Home page but only listed the Decks user created.
-- Nav bar may have both Home and User Page link
-
-## Flashcard List Page
-Display a list of flashcards for the selected deck
-
-## Flashcard Add/Edit Page
-Input fields for flashcard question and answer

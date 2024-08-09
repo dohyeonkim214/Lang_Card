@@ -12,6 +12,7 @@
             <div class="basis-1/3 p-6">
                 <div class="bg-white rounded shadow p-6">
                     <div>
+                        <label class="block" for="title">Deck Title:</label>
                         <h5 class="text-2xl">{{ $deck->name }}</h5>
                         <form class="mt-5" method="get" action="{{ route('decks.view', ['deck' => $deck->id]) }}">
                             <button class="block w-full bg-green-400 text-white p-3 font-bold">View</button>
@@ -30,13 +31,14 @@
     </div>
     <div class="flex flex-wrap">
         @if ($decks->isEmpty())
-        <p class="font-bold mx-auto m-5 text-lg">You don't have any Decks yet.</p>
+        <p class="font-bold mx-auto m-5 text-lg">There is no Decks.</p>
         @else
         @foreach ($decks as $deck)
         @if($deck->language_id == 1)
         <div class="basis-1/3 p-6">
             <div class="bg-white rounded shadow p-6">
                 <div>
+                    <label class="block" for="title">Deck Title:</label>
                     <h5 class="text-2xl">{{ $deck->name }}</h5>
                     <form class="mt-5" method="get" action="{{ route('decks.view', ['deck' => $deck->id]) }}">
                         <button class="block w-full bg-green-400 text-white p-3 font-bold">View</button>
@@ -57,13 +59,14 @@
     </div>
     <div class="flex flex-wrap">
             @if ($decks->isEmpty())
-            <p class="font-bold mx-auto m-5 text-lg">You don't have any Decks yet.</p>
+            <p class="font-bold mx-auto m-5 text-lg">There is no Decks.</p>
             @else
             @foreach ($decks as $deck)
             @if($deck->language_id == 2)
             <div class="basis-1/3 p-6">
                 <div class="bg-white rounded shadow p-6">
                     <div>
+                        <label class="block" for="title">Deck Title:</label>
                         <h5 class="text-2xl">{{ $deck->name }}</h5>
                         <form class="mt-5" method="get" action="{{ route('decks.view', ['deck' => $deck->id]) }}">
                             <button class="block w-full bg-green-400 text-white p-3 font-bold">View</button>
@@ -84,13 +87,14 @@
     </div>
     <div class="flex flex-wrap">
             @if ($decks->isEmpty())
-            <p class="font-bold mx-auto m-5 text-lg">You don't have any Decks yet.</p>
+            <p class="font-bold mx-auto m-5 text-lg">There is no Decks.</p>
             @else
             @foreach ($decks as $deck)
             @if($deck->language_id == 3)
             <div class="basis-1/3 p-6">
                 <div class="bg-white rounded shadow p-6">
                     <div>
+                        <label class="block" for="title">Deck Title:</label>
                         <h5 class="text-2xl">{{ $deck->name }}</h5>
                         <form class="mt-5" method="get" action="{{ route('decks.view', ['deck' => $deck->id]) }}">
                             <button class="block w-full bg-green-400 text-white p-3 font-bold">View</button>
@@ -110,13 +114,14 @@
     </div>
     <div class="flex flex-wrap">
             @if ($decks->isEmpty())
-            <p class="font-bold mx-auto m-5 text-lg">You don't have any Decks yet.</p>
+            <p class="font-bold mx-auto m-5 text-lg">There is no Decks.</p>
             @else
             @foreach ($decks as $deck)
             @if($deck->language_id == 4)
             <div class="basis-1/3 p-6">
                 <div class="bg-white rounded shadow p-6">
                     <div>
+                        <label class="block" for="title">Deck Title:</label>
                         <h5 class="text-2xl">{{ $deck->name }}</h5>
                         <form class="mt-5" method="get" action="{{ route('decks.view', ['deck' => $deck->id]) }}">
                             <button class="block w-full bg-green-400 text-white p-3 font-bold">View</button>
@@ -136,13 +141,14 @@
     </div>
     <div class="flex flex-wrap">
             @if ($decks->isEmpty())
-            <p class="font-bold mx-auto m-5 text-lg">You don't have any Decks yet.</p>
+            <p class="font-bold mx-auto m-5 text-lg">There is no Decks.</p>
             @else
             @foreach ($decks as $deck)
             @if($deck->language_id == 5)
             <div class="basis-1/3 p-6">
                 <div class="bg-white rounded shadow p-6">
                     <div>
+                        <label class="block" for="title">Deck Title:</label>
                         <h5 class="text-2xl">{{ $deck->name }}</h5>
                         <form class="mt-5" method="get" action="{{ route('decks.view', ['deck' => $deck->id]) }}">
                             <button class="block w-full bg-green-400 text-white p-3 font-bold">View</button>

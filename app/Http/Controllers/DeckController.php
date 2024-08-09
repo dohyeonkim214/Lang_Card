@@ -64,7 +64,7 @@ class DeckController extends Controller
     {
         $userId = Auth::id();
         $userDecks = Deck::where('user_id', $userId)->get();
-        $languages = Language::whereIn('name', ['English', 'Japanese', 'Korean', 'Chinese', 'Spanish', 'French'])->get();
+        $languages = Language::whereIn('language_name', ['English', 'Japanese', 'Korean', 'Spanish', 'French'])->get();
         return view('userpage.createEdit', compact('languages', 'userDecks'));
     }
 
@@ -72,13 +72,12 @@ class DeckController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required|string|max:255',
+            'name' => 'required|string|max:255',
             'language_id' => 'required|exists:languages,id',
         ]);
     
         $deck = new Deck();
-        $deck->title = $request->input('title');
-        $deck->name = $request->input('name', 'default_name'); // name 컬럼 설정
+        $deck->name = $request->input('name');
         $deck->user_id = auth()->id();
         $deck->language_id = $request->input('language_id');
         $deck->save();

@@ -2,7 +2,7 @@
 
 <div class="mt-5 bg-white border-b border-gray-100">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 font-bold h-16 text-2xl flex items-center justify-center">
-            <h2>{{ $deck->title }}</h2>
+            <h2>{{ $deck->name }}</h2>
     </div>
 </div>
 
@@ -20,7 +20,7 @@
                 <div>
                     <label class="font-bold">English:</label>
                     <p class="text-2xl mb-5 font-bold">{{ $flashcard->english_text }}</p>
-                    <label class="font-bold">{{ $language->name}}</label>
+                    <label class="font-bold">{{ $language->language_name}}:</label>
                     <p class="text-2xl font-bold">{{ $flashcard->second_language_text }}</p>
                 </div>
             </div>
@@ -40,7 +40,7 @@
         <form class="m-5" method="get" action="{{ route('userpage.index') }}">
             <button class="block w-30 bg-gray-400 text-white p-3 font-bold">< Back to Deck List</button>
         </form>
-        
+
         <form class="m-5" method="get" action="{{ route('flashcards.create', $deck) }}">
             <button class="block w-30 bg-sky-400 text-white p-3 font-bold">Create a New Flashcard</button>
         </form>

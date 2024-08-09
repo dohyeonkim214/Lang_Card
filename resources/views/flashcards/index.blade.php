@@ -40,7 +40,7 @@
             <li class="m-3 bg-white p-5 text-center">
                 <div>
                     <label class="block text-gray-700 text-sm font-bold mb-2">Contents</label>
-                    <span>{{ $flashcard->another_language_text }} - {{ $flashcard->english_text }}</span>
+                    <span>{{ $flashcard->second_language_text }} - {{ $flashcard->english_text }}</span>
                 </div>
                 <div class="mt-5">
                     <label class="block text-gray-700 text-sm font-bold mb-2">Decks</label>

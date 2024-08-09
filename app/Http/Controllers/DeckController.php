@@ -28,7 +28,10 @@ class DeckController extends Controller
     // open the selected Deck
     public function openDeck(Deck $deck) 
     {
-        $flashcards = Flashcard::where('deck_id', $deck->id)->get();
+        $flashcards = Flashcard::where('deck_id', $deck->id)
+        ->orWhere('second_deck_id', $deck->id)
+        ->orWhere('third_deck_id', $deck->id)->get();
+
         $language = Language::find($deck->language_id);
         return view('decks.view', compact('deck', 'flashcards', 'language'));
     }

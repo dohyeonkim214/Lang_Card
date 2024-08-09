@@ -2,7 +2,7 @@
 
 <div class="mt-5 bg-white border-b border-gray-100">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 font-bold h-16 text-2xl flex items-center justify-center">
-        <h2>Selected Deck: {{ $deck->name }}</h2>
+        <h2>{{ $deck->name }}</h2>
     </div>
 </div>
 <div class="m-20 mt-5">
@@ -10,11 +10,15 @@
         @csrf
         @method('put')
         <div>
-            <label class="block text-gray-700 text-sm font-bold mb-2">Deck Title</label>
+            <label class="block text-gray-700 text-sm font-bold mb-2">Deck Title:</label>
             <input type="text" id="name" name="name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" value="{{ $deck->name }}" required>
         </div>
         <div class="mt-5 flex flex-wrap">
-            <label class="block text-gray-700 text-sm font-bold mb-2">Complete?</label>
+            <label class="block text-gray-700 text-sm font-bold mb-2">Deck Language:</label>
+            <p class="ml-3">{{ $language->language_name }}</p>
+        </div>
+        <div class="mt-5 flex flex-wrap">
+            <label class="block text-gray-700 text-sm font-bold mb-2">Complete?:</label>
             <input type="checkbox" id="completed" name="completed" class="ml-3" {{ $deck->completed ? 'checked' : '' }}>
         </div>
         <div class="flex flex-wrap justify-center">

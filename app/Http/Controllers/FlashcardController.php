@@ -15,8 +15,9 @@ class FlashcardController extends Controller
     public function index(Deck $deck)
     {
         $flashcards = Flashcard::where('deck_id', $deck->id)
-            ->orWhere('second_deck_id', $deck->id)
-            ->orWhere('third_deck_id', $deck->id)->get();
+        ->orWhere('second_deck_id', $deck->id)
+        ->orWhere('third_deck_id', $deck->id)->get();
+
         $language = Language::find($deck->language_id);
         $decks = Deck::all();
         return view('flashcards.index', compact('deck', 'flashcards', 'language', 'decks'));

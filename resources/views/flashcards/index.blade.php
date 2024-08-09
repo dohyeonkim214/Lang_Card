@@ -49,9 +49,9 @@
                 <div class="mt-5">
                     <label class="block text-gray-700 text-sm font-bold mb-2">Decks</label>
                     <ul>
-                        @foreach ($decks as $deck)
-                        @if (($deck->id == $flashcard->deck_id) || ($deck->id == $flashcard->second_deck_id) ||($deck->id == $flashcard->third_deck_id))
-                        <li>{{ $deck->name}} </li>
+                        @foreach ($decks as $d)
+                        @if (($d->id == $flashcard->deck_id) || ($d->id == $flashcard->second_deck_id) ||($d->id == $flashcard->third_deck_id))
+                        <li>{{ $d->name}} </li>
                         @endif
                         @endforeach
                     </ul>

@@ -38,22 +38,22 @@
             <label class="block text-gray-700 text-sm font-bold">Decks</label>
             <small>Only {{ $language->language_name }} decks show in the selection.</small>
             <select name="deck_id" id="deck_id" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
-                @foreach($decks as $deck)
-                <option value="{{ $deck->id }}" {{ isset($deck) ? 'selected' : '' }}>{{ $deck->name }}</option>
+                @foreach($decks as $deckOption)
+                <option value="{{ $deckOption->id }}" {{ old('deck_id', isset($deck) ? $deck->id : '') == $deckOption->id ? 'selected' : '' }}>{{ $deckOption->name }}</option>
                 @endforeach
             </select>
 
             <select name="second_deck_id" id="second_deck_id" class="mt-2 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
             <option value="" >Select...</option>
-                @foreach($decks as $deck)
-                <option value="{{ $deck->id }}">{{ $deck->name }}</option>
+                @foreach($decks as $d)
+                <option value="{{ $deck->id }}">{{ $d->name }}</option>
                 @endforeach
             </select>
 
             <select name="third_deck_id" id="third_deck_id" class="mt-2 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
             <option value="">Select...</option>
-                @foreach($decks as $deck)
-                <option value="{{ $deck->id }}">{{ $deck->name }}</option>
+                @foreach($decks as $d)
+                <option value="{{ $deck->id }}">{{ $d->name }}</option>
                 @endforeach
             </select>
         </div>

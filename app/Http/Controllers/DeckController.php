@@ -60,12 +60,12 @@ class DeckController extends Controller
     }
 
     // Create deck page
-    public function create()
+    public function create(Deck $deck)
     {
         $userId = Auth::id();
         $userDecks = Deck::where('user_id', $userId)->get();
         $languages = Language::whereIn('language_name', ['English', 'Japanese', 'Korean', 'Spanish', 'French'])->get();
-        return view('userpage.createEdit', compact('languages', 'userDecks'));
+        return view('userpage.createEdit', compact('languages', 'userDecks', 'deck'));
     }
 
     // Create a new Deck
@@ -90,7 +90,7 @@ class DeckController extends Controller
     {
         if (Auth::id() == $deck->user_id) {
             $request->validate(['name' => 'required|string|max:255']);
-            
+
             $deck->name = $request->name;
             $deck->completed = $request->has('completed');
             $deck->save();
